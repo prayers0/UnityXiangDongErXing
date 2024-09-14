@@ -2410,12 +2410,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParallaxScrollingController: {fileID: 1919217559}
+  mapConfig: {fileID: 11400000, guid: 2a88a6a74c27a3745b847ba4fa03cba7, type: 2}
   groundTileMap: {fileID: 1577170971}
-  groundTile: {fileID: 11400000, guid: 73cccf04c87dd694f87dd29138d3fc2b, type: 2}
   cameraTransform: {fileID: 591653407}
   mapSeed: 0
-  chunkSize: 50
-  chunkSegmentSizeRange: {x: 2, y: 11}
 --- !u!1 &2089924971
 GameObject:
   m_ObjectHideFlags: 0

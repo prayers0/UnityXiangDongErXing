@@ -4,16 +4,17 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System;
 using Random = System.Random;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 
 public class MapController : MonoBehaviour
 {
     [SerializeField] private ParallaxScrollingController ParallaxScrollingController;
+    [SerializeField] private MapConfig mapConfig;
     [SerializeField] private Tilemap groundTileMap;
-    [SerializeField] private TileBase groundTile;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private int mapSeed;//地图种子
-    [SerializeField] private int chunkSize=50;
-    [SerializeField] private Vector2Int chunkSegmentSizeRange = new Vector2Int(2, 11);//2~10
+    
     private float lastTargetPosx = float.MaxValue;
 
     private void Awake()
@@ -42,43 +43,54 @@ public class MapController : MonoBehaviour
     {
         int chunkSeed = mapSeed + chunkCoord;
         Random chunkRandom=new Random(chunkSeed);
-        CreateGrounds(chunkCoord, chunkRandom);
+        CreateChunkSegments(chunkCoord, chunkRandom);
         //TODO:生成花草
     }
 
-    //创建地面
-    private void CreateGrounds(int chunkCoord,Random random)
+    //生成地图块中的段
+    private void CreateChunkSegments(int chunkCoord,Random random)
     {
-        int start = chunkSize * chunkCoord;
+        int start = mapConfig.chunkSize * chunkCoord;
         //一个地图内部要按照端去生成，要避免一个段少于2格的情况（规则瓦片会崩）
-        for(int currentCoord = 0; currentCoord < chunkSize;)
+        for(int currentCoord = 0; currentCoord < mapConfig.chunkSize;)
         {
             //随机一个段落尺寸
-            int segmentSize = random.Next(chunkSegmentSizeRange.x, chunkSegmentSizeRange.y);
+            int segmentSize = random.Next(mapConfig.chunkSegmentSizeRange.x, mapConfig.chunkSegmentSizeRange.y);
 
             //段落尺寸不能导致下一个段落尺寸少于2
-            if (chunkSize - (currentCoord + segmentSize) < 2)
+            if (mapConfig.chunkSize - (currentCoord + segmentSize) < 2)
             {
-                segmentSize = chunkSize - currentCoord;//填满
+                segmentSize = mapConfig.chunkSize - currentCoord;//填满
             }
             //段落的尺寸不能导致超出当前的地图块
-            if (currentCoord+segmentSize>chunkSize)
+            if (currentCoord+segmentSize>mapConfig.chunkSize)
             {
-                segmentSize = chunkSize - currentCoord;//填满
+                segmentSize =   mapConfig.chunkSize - currentCoord;//填满
             }
-            //填充tileMap
             bool secondFloor = random.Next(0, 2) == 0;
-            for(int i = 0; i < segmentSize; i++)
-            {
-                groundTileMap.SetTile(new Vector3Int(start + currentCoord + i, 0, 0), groundTile);
-                if (secondFloor)
-                {
-                    groundTileMap.SetTile(new Vector3Int(start + currentCoord + i, 1, 0), groundTile);
-                }
-            }
-            Debug.Log($"地图块段起点。{currentCoord},长度，{segmentSize}");
-            currentCoord+= segmentSize;
+            int segmentStartCoord = start + currentCoord;
+            CreateGround(segmentStartCoord,segmentSize,secondFloor);
+            CreateMapDecorations(segmentStartCoord, segmentSize, secondFloor);
+            currentCoord += segmentSize;
         }
     }
+    //生成地面
+    private void CreateGround(int startCoord,int segmentSize,bool secondFloor)
+    {
+        //填充tileMap
+        for (int i = 0; i < segmentSize; i++)
+        {
+            groundTileMap.SetTile(new Vector3Int(startCoord + i, 0, 0), mapConfig.groundTile);
+            if (secondFloor)
+            {
+                groundTileMap.SetTile(new Vector3Int(startCoord + i, 1, 0), mapConfig.groundTile);
+            }
+        }
+        
+    }
+    //创建装饰物
+    private void CreateMapDecorations(int startCoord, int segmentSize, bool secondFloor)
+    {
 
+    }
 }

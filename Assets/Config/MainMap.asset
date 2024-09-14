@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf81ff6cf650b3a4ea967f0f7325572e, type: 3}
+  m_Name: MainMap
+  m_EditorClassIdentifier: 
+  groundTile: {fileID: 11400000, guid: 73cccf04c87dd694f87dd29138d3fc2b, type: 2}
+  chunkSize: 50
+  chunkSegmentSizeRange: {x: 2, y: 11}
+  mapDecorationConfigs:
+  - name: "\u82B1\u8349"
+    layer: MapDecoration1
+    probaility: 0.7
+    size: 1
+    xOffsetRange: {x: -1, y: 1}
+    prefab:
+    - {fileID: 426429910451460663, guid: 2586473f53711ed41805422d930d6963, type: 3}
+    - {fileID: 1308590366583203552, guid: 7133bd9c88e227743822a3abb15e6b84, type: 3}
+    - {fileID: 5850182077688508017, guid: 8060f46a7dfa0ea4889377daec586473, type: 3}
+    - {fileID: 8039080188033198718, guid: 7da7c113e0ce7a14c8a036632ecd7371, type: 3}
+    - {fileID: 4877810253719048430, guid: 52ee405ff0466a34eb9c592fe1c35a3c, type: 3}
+    - {fileID: 7644597160809754672, guid: f91ce7e330a6645419b6e73fe5f0f4ff, type: 3}
+    - {fileID: 5206491052413109815, guid: 2ad9f29be27c3c741bfe5a8af0ba7628, type: 3}
+    - {fileID: 427031546147623885, guid: b930ecdb11c43504ba03f0c9b9bda002, type: 3}
+    - {fileID: 1632638605639831410, guid: 899968a013e287a4fa330b3022ab471d, type: 3}
+    - {fileID: 9138754360348082589, guid: 91d72294b1d3e61408770d97e10ebf2f, type: 3}
+    - {fileID: 7642566414422206437, guid: 92bd183e5140e694282a948f930faa8c, type: 3}
+    - {fileID: 992962155526782839, guid: fc38e2809d4a7d04a842d37504c02d8d, type: 3}
+    - {fileID: 5769052678661212809, guid: 07bf0c06c5978974398a12e442186eb1, type: 3}
+    - {fileID: 7209845289600482556, guid: 0ab3c87cded473f478a1a4bbb57a4973, type: 3}
+    - {fileID: 3250570659303784224, guid: 729ed40bea5fa2b4094bb5ab2fac4ddf, type: 3}
+    - {fileID: 5430437109010036680, guid: 1e33c3c83b92b184c8cebd20c2b93953, type: 3}
+    - {fileID: 5678834416623165450, guid: 4a5e4f0724123834b9d3a08f4774aede, type: 3}
+    - {fileID: 4739801852260413112, guid: 53f53db93ac36174386cb52f4015203a, type: 3}
+    - {fileID: 7757866201005488431, guid: 29233e8022ddd354aa140cd3a7a76603, type: 3}
+    - {fileID: 6663644457463525851, guid: b27499f47c9767540b2af8fb568bab83, type: 3}
+    - {fileID: 257935040109721658, guid: c3091a3e7e390224c9b3d7a331400fad, type: 3}
+    - {fileID: 1829876291795117753, guid: 314f37599a206764e81f62f5dbdd4502, type: 3}
+    - {fileID: 2613171084143990152, guid: 5bebc82455a3cb140b03518df1afa4ba, type: 3}
+    - {fileID: 2256118850533101749, guid: 4c84955a92cec1044a1e0677803360f0, type: 3}
+    - {fileID: 1008059385980601086, guid: 24a50307a056c93418c549cd20ef71d4, type: 3}
+    - {fileID: 4338145092417777749, guid: e4923337f7943ae4c96734e3182ea667, type: 3}
+    - {fileID: 3026386172604070488, guid: fd7e96015981b0c45bb362ed85e82a6a, type: 3}
+    - {fileID: 8817745885080157073, guid: 0d1fdd9826d37274089459b507d822d8, type: 3}
+    - {fileID: 641407112153394314, guid: cd6977e3492a5ba4482ac16df6bb6adc, type: 3}
+    - {fileID: 5946572264291629702, guid: d205e25cb0e7b8c479b94a494c120336, type: 3}
+    - {fileID: 6258118957116927477, guid: 2f2d4d8f78b674042993289a508a2b23, type: 3}
+    - {fileID: 7929125339353246852, guid: ac6c2f22ba11b5c42855eaa96aaa9dfd, type: 3}
+  - name: "\u6811\u6728"
+    layer: MapDecoration2
+    probaility: 0.7
+    size: 2
+    xOffsetRange: {x: -1.5, y: 1.5}
+    prefab:
+    - {fileID: 7807369444162374103, guid: 933e6dc0ff9c0a34998d6a04a3c714f4, type: 3}
+    - {fileID: 8557104647713992389, guid: 793818c47862ee542bbdc6a451e8d8a5, type: 3}
+    - {fileID: 785288043778608824, guid: 63d4b94bbccdaab49965b6852b8fd8f0, type: 3}
+    - {fileID: 9064303659825895603, guid: d6c1eb6f780195e4e9bd342af6d0a42d, type: 3}
+    - {fileID: 5844793845797330741, guid: 06c8fb3d22a3ae842855402eed62872a, type: 3}
+    - {fileID: 511913897852485952, guid: d6190ffdeb07727458f37a60c695fa9d, type: 3}
+    - {fileID: 2543067857836734540, guid: 8d3d0c07f88f700438eb2b01e570d21e, type: 3}
+  - name: "\u5EFA\u7B51\u7269"
+    layer: MapDecoration3
+    probaility: 0.7
+    size: 5
+    xOffsetRange: {x: 0, y: 0}
+    prefab:
+    - {fileID: 4697524222447109196, guid: dce6c994e34a8a545a9e817ed48f1fa9, type: 3}
+    - {fileID: 7583522001025996205, guid: 46e5ac66e567e364796b717d7b599cf9, type: 3}
+    - {fileID: 3466428726607644932, guid: 909798396b0887c43a1b85c9592a5df7, type: 3}
+    - {fileID: 5598412547105681084, guid: f110a50801410484681389ec001e643c, type: 3}
+    - {fileID: 8871231285016625493, guid: f76de9c279bf77a4e9321005cfbfbe10, type: 3}
+    - {fileID: 4417697272166143068, guid: dc899ca10d700654c9165c0279b70da9, type: 3}
+    - {fileID: 2942185491321363474, guid: d6fb74524265eef4a82b7e9c4c06cd8e, type: 3}
+    - {fileID: 3745586523731858593, guid: 66d0960bf03bc8446aa0508bc677962b, type: 3}
+    - {fileID: 276180531773344631, guid: e848dfbe9cd0a0644a032e144e2a150f, type: 3}
