@@ -36,13 +36,14 @@ public class MapController : MonoBehaviour
 
     public void Init(int mapSeed,PlayerController playerController)
     {
-        Grid grid = GetComponentInChildren<Grid>();
+        this.mapSeed = mapSeed;
         groundTileMap.ClearAllTiles();
-        cameraController.Init(playerController.transform);
+
+        Grid grid = GetComponentInChildren<Grid>();
         cellSize = grid.cellSize.x;
         cellTopOffset = cellSize / 2;
-        this.mapSeed = mapSeed;
-        
+        cameraController.Init(playerController.transform);
+        ParallaxScrollingController.Init(cameraController.screenWidth);
     }
 
     private void LateUpdate()
