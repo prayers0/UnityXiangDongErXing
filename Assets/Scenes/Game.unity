@@ -2691,10 +2691,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2104aad7a9365ea40b374e5776faa29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  view: {fileID: 890811955}
   rigidbody: {fileID: 2089924976}
   moveSpeed: 10
   jumpPower: 10
-  playerView: {fileID: 890811955}
 --- !u!70 &2089924975
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
