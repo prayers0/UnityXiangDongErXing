@@ -10,12 +10,13 @@ using Unity.VisualScripting;
 public class MapController : MonoBehaviour
 {
     [SerializeField] private ParallaxScrollingController ParallaxScrollingController;
+    [SerializeField] private CameraController cameraController;
     [SerializeField] private Transform decorationRoot;
     [SerializeField] private MapConfig mapConfig;
 
     [SerializeField] private Tilemap groundTileMap;
-    [SerializeField] private Transform cameraTransform;
     [SerializeField] private int mapSeed;//地图种子
+    [SerializeField] private PlayerController playerController; //玩家应该有更上级的管理器初始化得来
 
     //key地图块索引，value：地图块对象
     private Dictionary<int,MapChunk> mapChunkDic = new Dictionary<int,MapChunk>();
@@ -28,28 +29,29 @@ public class MapController : MonoBehaviour
 
     private void Awake()
     {
-        Init(mapSeed);
+        Init(mapSeed,playerController);
         //CreateMapChunk(0);
         
     }
 
-    public void Init(int mapSeed)
+    public void Init(int mapSeed,PlayerController playerController)
     {
         Grid grid = GetComponentInChildren<Grid>();
         groundTileMap.ClearAllTiles();
-
+        cameraController.Init(playerController.transform);
         cellSize = grid.cellSize.x;
         cellTopOffset = cellSize / 2;
         this.mapSeed = mapSeed;
+        
     }
 
     private void LateUpdate()
     {
-        if (cameraTransform.position.x != lastTargetPosx)
+        if (cameraController.transform.position.x != lastTargetPosx)
         {
             float oldTargetPosX = lastTargetPosx;
-            float newTargetPosX = cameraTransform.position.x;
-            lastTargetPosx = cameraTransform.position.x;
+            float newTargetPosX = cameraController.transform.position.x;
+            lastTargetPosx = cameraController.transform.position.x;
             //更新视差
             ParallaxScrollingController.UpdateLyayrs(newTargetPosX);
             //更新地图
