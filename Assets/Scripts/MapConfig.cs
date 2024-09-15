@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 public class MapConfig : ScriptableObject
 {
     public TileBase groundTile;
+    public float mapChunkDestroyTime = 5;
     public int chunkSize = 50;//地图块的尺寸
     public Vector2Int chunkSegmentSizeRange = new Vector2Int(2, 11);//地图块的尺寸2~10
     //生成时每一层之间互不干扰

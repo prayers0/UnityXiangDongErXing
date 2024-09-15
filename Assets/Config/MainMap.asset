@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MainMap
   m_EditorClassIdentifier: 
   groundTile: {fileID: 11400000, guid: 73cccf04c87dd694f87dd29138d3fc2b, type: 2}
+  mapChunkDestroyTime: 1
   chunkSize: 50
   chunkSegmentSizeRange: {x: 2, y: 11}
   mapDecorationConfigs:
