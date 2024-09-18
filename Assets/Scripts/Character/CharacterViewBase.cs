@@ -21,7 +21,12 @@ public class CharacterViewBase : MonoBehaviour
     {
         if (animationName == currentAnimationName && !refresh) return;
         currentAnimationName = animationName;
-        animator.Play(animationName, 0);
+        animator.Play(animationName, 0,0);
+    }
+
+    public void PlayHurtAnimation()
+    {
+        animator.Play("Hurt", 1,0);
     }
 
     public void SetDir(bool right)

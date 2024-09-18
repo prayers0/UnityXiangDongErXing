@@ -13,4 +13,13 @@ public class SkillData
     public float moveSpeedMultiply;
     public float moveSpeedMultiplyOnJump;
     public AudioClip releaseAudio;
+    public AudioClip hitClip;
+    public HitData hitData;
+
+    [Serializable]
+    public class HitData
+    {
+        public float knockbackSpeed;//击退速度
+        public float knockbackTime;//击退速度
+    }
 }

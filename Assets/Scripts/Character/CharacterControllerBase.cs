@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterControllerBase<V> : MonoBehaviour,IDamageable where V : CharacterViewBase
+public interface ICharacterController 
+{
+    Transform transform { get; }
+}
+public class CharacterControllerBase<V> : MonoBehaviour,ICharacterController,IDamageable where V : CharacterViewBase
 {
     [SerializeField] protected V view;
     [SerializeField] protected new Rigidbody2D rigidbody;
@@ -112,9 +116,12 @@ public class CharacterControllerBase<V> : MonoBehaviour,IDamageable where V : Ch
     {
     }
 
+    //打别人
     private void OnHit(IDamageable damageable, int skillIndex)
     {
-        damageable.Hurt(skillDatas[skillIndex].attackValue);
+        SkillData skillData = skillDatas[skillIndex];
+        damageable.Hurt(skillData.attackValue,this,skillData.hitData);
+        if (skillData.hitData != null) AudioManager.Instance.PlayerAudio(skillData.hitClip);
     }
 
     private void OnSkillStop()
@@ -122,5 +129,11 @@ public class CharacterControllerBase<V> : MonoBehaviour,IDamageable where V : Ch
         currentSkill = null;
         weapon.StopCheck();
     }
+    //被打
+    public virtual void Hurt(float damage, ICharacterController source, SkillData.HitData hitData)
+    {
+        view.PlayHurtAnimation();
+    }
 
+    
 }
