@@ -896,7 +896,7 @@ MonoBehaviour:
   view: {fileID: 58822091}
   rigidbody: {fileID: 823171077}
   moveSpeed: 3
-  jumpPower: 8
+  jumpPower: 12
   weapon: {fileID: 1407619214}
   skillDatas:
   - animationName: Attack1

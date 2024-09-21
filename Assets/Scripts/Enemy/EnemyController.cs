@@ -36,12 +36,12 @@ public class EnemyController : CharacterControllerBase<EnemyView>
 
         float distance = MathF.Abs(transform.position.x - playerPosX);
         int currentCellCoord = MapController.current.GetCellCoord(currentPosX);
-        int nextCellCoord = currentCellCoord + (patrolDirIsRight ? 1 : -1);
         bool currentIsSecondLayer = MapController.current.CheckCoordIsSedondLayer(currentCellCoord);
-        bool nextSecondLayer= MapController.current.CheckCoordIsSedondLayer(nextCellCoord);
+        
         if (!pursueState)
         {
-            
+            int nextCellCoord = currentCellCoord + (patrolDirIsRight ? 1 : -1);
+            bool nextSecondLayer = MapController.current.CheckCoordIsSedondLayer(nextCellCoord);
             bool changeDir = currentIsSecondLayer !=nextSecondLayer|| MapController.current.IsEmptyCell(nextCellCoord);
             if (changeDir) patrolDirIsRight = !patrolDirIsRight;
             Move(patrolDirIsRight ? 1 : -1);
@@ -62,6 +62,10 @@ public class EnemyController : CharacterControllerBase<EnemyView>
             }
 
             //当前是一楼，下一节点是二楼
+            bool isRight = playerPosX > currentPosX;
+
+            int nextCellCoord = currentCellCoord + (isRight ? 1 : -1);
+            bool nextSecondLayer = MapController.current.CheckCoordIsSedondLayer(nextCellCoord);
             bool needJump = !currentIsSecondLayer && nextSecondLayer;
             if (needJump && CanJump())
             {
@@ -69,7 +73,6 @@ public class EnemyController : CharacterControllerBase<EnemyView>
             }
             else if (CanMove())
             {
-                bool isRight = playerPosX > currentPosX;
                 Move(isRight ? 1 : -1);
             }
         }
