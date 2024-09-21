@@ -6,9 +6,12 @@ using System;
 using Random = System.Random;
 using Unity.Mathematics;
 using Unity.VisualScripting;
+using System.Security.Cryptography.X509Certificates;
+using System.ComponentModel;
 
 public class MapController : MonoBehaviour
 {
+    public static MapController current;
     [SerializeField] private ParallaxScrollingController ParallaxScrollingController;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private Transform decorationRoot;
@@ -17,6 +20,7 @@ public class MapController : MonoBehaviour
     [SerializeField] private Tilemap groundTileMap;
     [SerializeField] private int mapSeed;//地图种子
     [SerializeField] private PlayerController playerController; //玩家应该有更上级的管理器初始化得来
+    public bool hasPlayer => playerController != null;
 
     //key地图块索引，value：地图块对象
     private Dictionary<int,MapChunk> mapChunkDic = new Dictionary<int,MapChunk>();
@@ -26,6 +30,7 @@ public class MapController : MonoBehaviour
 
 
     private float lastTargetPosx = float.MaxValue;
+    public float playerControllerPoxX => playerController.transform.position.x;
 
     private void Awake()
     {
@@ -36,6 +41,7 @@ public class MapController : MonoBehaviour
 
     public void Init(int mapSeed,PlayerController playerController)
     {
+        current = this;
         this.mapSeed = mapSeed;
         groundTileMap.ClearAllTiles();
 
@@ -124,7 +130,20 @@ public class MapController : MonoBehaviour
         destoryMapChunkList.Clear();
     }
 
-    
+    public int GetCellCoord(float pos)
+    {
+        return (int)(pos / cellSize);
+    }
+
+    public bool CheckCoordIsSedondLayer(int coord)
+    {
+        return groundTileMap.GetTile(new Vector3Int(coord, 1, 0)) != null;
+    }
+
+    public bool IsEmptyCell(int coord)
+    {
+        return groundTileMap.GetTile(new Vector3Int(coord, 0, 0)) == null;
+    }
 }
 
     

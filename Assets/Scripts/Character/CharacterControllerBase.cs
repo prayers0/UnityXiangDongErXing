@@ -105,7 +105,7 @@ public class CharacterControllerBase<V> : MonoBehaviour,ICharacterController,IDa
     {
         currentSkill = skillDatas[skillIndex];
         weapon.SetSkill(skillIndex);//…Ë÷√Œ‰∆˜
-        view.PlayerAnimation(currentSkill.animationName);
+        view.PlayerAnimation(currentSkill.animationName,true);
         if (currentSkill.releaseAudio != null)
         {
             AudioManager.Instance.PlayerAudio(currentSkill.releaseAudio);
