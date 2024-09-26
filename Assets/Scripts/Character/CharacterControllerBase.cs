@@ -76,7 +76,7 @@ public class CharacterControllerBase<V> : MonoBehaviour,ICharacterController,IDa
         rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
     }
 
-    protected void OnFootStep()
+    protected virtual void OnFootStep()
     {
         if (footStepClips.Length == 0) return;
         AudioManager.Instance.PlayerAudio(footStepClips[Random.Range(0, footStepClips.Length)],0.3f);

@@ -13,6 +13,8 @@ public class MapConfig : ScriptableObject
     public Vector2Int chunkSegmentSizeRange = new Vector2Int(2, 11);//地图块的尺寸2~10
     //生成时每一层之间互不干扰
     public List<MapDecorationLayerConfig> mapDecorationConfigs = new List<MapDecorationLayerConfig>();
+    public MapSpawnEnemyConfig mapSpawnEnemyConfig;
+
 }
 
 [Serializable]
@@ -24,5 +26,12 @@ public  class MapDecorationLayerConfig
     public int size;//占据几个格子兮，建筑物5，树木2花草1
     public Vector2 xOffsetRange;//格子内物体的随机偏移范围
     public List<GameObject> prefab;//预制体随机选取一个
+}
 
+[Serializable]
+public class MapSpawnEnemyConfig
+{
+    public float spawnProbability;//是否生成的概率
+    public Vector2Int spawnCountRange;//生成数量的范围
+    public List<GameObject> prefabs;
 }

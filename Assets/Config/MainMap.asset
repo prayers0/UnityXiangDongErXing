@@ -83,3 +83,9 @@ MonoBehaviour:
     - {fileID: 2942185491321363474, guid: d6fb74524265eef4a82b7e9c4c06cd8e, type: 3}
     - {fileID: 3745586523731858593, guid: 66d0960bf03bc8446aa0508bc677962b, type: 3}
     - {fileID: 276180531773344631, guid: e848dfbe9cd0a0644a032e144e2a150f, type: 3}
+  mapSpawnEnemyConfig:
+    spawnProbability: 0.5
+    spawnCountRange: {x: 0, y: 3}
+    prefabs:
+    - {fileID: 9181577119102019765, guid: 30a9bdf17e0e96c469960148875cab1c, type: 3}
+    - {fileID: 814689394543574218, guid: 43851f8d5902c234289546b3706e169e, type: 3}

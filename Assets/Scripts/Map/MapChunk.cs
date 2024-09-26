@@ -68,9 +68,38 @@ public class MapChunk
             int segmentStartCoord = start + currentCoord;
             CreateGround(segmentStartCoord, segmentSize, secondFloor);
             CreateMapDecorations(segmentStartCoord, segmentSize, secondFloor, random);
+            CreateEnemys(segmentStartCoord, segmentSize, secondFloor);
             currentCoord += segmentSize;
         }
     }
+    //生成敌人
+    private void CreateEnemys(int startCoord, int size, bool secondFloor)
+    {
+        //怪物生成没必要基于种子随机
+        MapSpawnEnemyConfig spawnEnemyConfig = mapConfig.mapSpawnEnemyConfig;
+
+        //是否要生成
+        if (UnityEngine.Random.Range(0, 1f) < spawnEnemyConfig.spawnProbability)
+        {
+            if (spawnEnemyConfig.prefabs.Count == 0) return;
+            //生成数量
+            int count = UnityEngine.Random.Range(spawnEnemyConfig.spawnCountRange.x, spawnEnemyConfig.spawnCountRange.y + 1);
+            //随机生成怪物
+            for(int i = 0; i < count; i++)
+            {
+                
+                EnemyController enemyController=GameObject.Instantiate(spawnEnemyConfig.
+                    prefabs[UnityEngine.Random.Range(0, spawnEnemyConfig.prefabs.Count)])
+                    .GetComponent<EnemyController>();
+                int coord = UnityEngine.Random.Range(0, size) + startCoord;
+                Vector3 pos = new Vector3(MapController.current.GetCellWorldPostion(coord),
+                    MapController.current.GetLayerWorldPosition(secondFloor), 0);
+                enemyController.transform.position = pos;
+                enemyController.Init();
+            }
+        }
+    }
+
     //生成地面
     private void CreateGround(int startCoord, int size, bool secondFloor)
     {

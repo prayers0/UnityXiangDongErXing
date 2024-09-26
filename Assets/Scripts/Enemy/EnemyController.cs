@@ -14,10 +14,10 @@ public class EnemyController : CharacterControllerBase<EnemyView>
     private Coroutine doKnockbackCoroutine;
     private bool pursueState;
     private bool patrolDirIsRight;
-    private void Start()
-    {
-        Init();
-    }
+    //private void Start()
+    //{
+    //    Init();
+    //}
 
     public override void Init()
     {
@@ -98,5 +98,18 @@ public class EnemyController : CharacterControllerBase<EnemyView>
         }
         StopMove();
         doKnockbackCoroutine = null;
+    }
+
+    protected override void OnFootStep()
+    {
+        if (footStepClips.Length == 0) return;
+        PlayerSpaceAudio(footStepClips[UnityEngine.Random.Range(0, footStepClips.Length)], 0.5f);
+    }
+
+    private void PlayerSpaceAudio(AudioClip audioClip,float volum)
+    {
+        float dis = MathF.Abs(MapController.current.lastCameraPosx - transform.position.x);
+        if (dis == 0) dis = 0.001f;
+        AudioManager.Instance.PlayerAudio(audioClip, volum * (1 / dis));
     }
 }

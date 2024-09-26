@@ -8,6 +8,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using System.Security.Cryptography.X509Certificates;
 using System.ComponentModel;
+using UnityEngine.EventSystems;
 
 public class MapController : MonoBehaviour
 {
@@ -26,10 +27,10 @@ public class MapController : MonoBehaviour
     private Dictionary<int,MapChunk> mapChunkDic = new Dictionary<int,MapChunk>();
     private float cellSize;//格子尺寸
 
-    private float cellTopOffset;//地图种子
+    private float halfCellSize;//地图种子
 
 
-    private float lastTargetPosx = float.MaxValue;
+    public float lastCameraPosx { get; private set; } = float.MaxValue;
     public float playerControllerPoxX => playerController.transform.position.x;
 
     private void Awake()
@@ -47,23 +48,23 @@ public class MapController : MonoBehaviour
 
         Grid grid = GetComponentInChildren<Grid>();
         cellSize = grid.cellSize.x;
-        cellTopOffset = cellSize / 2;
+        halfCellSize = cellSize / 2;
         cameraController.Init(playerController.transform);
         ParallaxScrollingController.Init(cameraController.screenWidth);
     }
 
     private void LateUpdate()
     {
-        if (cameraController.transform.position.x != lastTargetPosx)
+        if (cameraController.transform.position.x != lastCameraPosx)
         {
-            float oldTargetPosX = lastTargetPosx;
+            float oldTargetPosX = lastCameraPosx;
             float newTargetPosX = cameraController.transform.position.x;
-            lastTargetPosx = cameraController.transform.position.x;
+            lastCameraPosx = cameraController.transform.position.x;
             //更新视差
             ParallaxScrollingController.UpdateLyayrs(newTargetPosX);
             //更新地图
             CheckMapChunkCreation(oldTargetPosX, newTargetPosX);
-            lastTargetPosx = newTargetPosX;
+            lastCameraPosx = newTargetPosX;
         }
         CheckMapChunkDestroy();
     }
@@ -108,7 +109,7 @@ public class MapController : MonoBehaviour
         {
             mapChunk = new MapChunk();
             mapChunkDic.Add(chunkCoord, mapChunk);
-            mapChunk.Init(mapConfig, groundTileMap, decorationRoot, chunkCoord, mapSeed, cellSize, cellTopOffset);
+            mapChunk.Init(mapConfig, groundTileMap, decorationRoot, chunkCoord, mapSeed, cellSize, halfCellSize);
         }
        
     }
@@ -143,6 +144,16 @@ public class MapController : MonoBehaviour
     public bool IsEmptyCell(int coord)
     {
         return groundTileMap.GetTile(new Vector3Int(coord, 0, 0)) == null;
+    }
+
+    public float GetCellWorldPostion(int coord)
+    {
+        return cellSize * coord - halfCellSize; 
+    }
+
+    public float GetLayerWorldPosition(bool secondLayer)
+    {
+        return cellSize * (secondLayer ? 2 : 1) ;
     }
 }
 
