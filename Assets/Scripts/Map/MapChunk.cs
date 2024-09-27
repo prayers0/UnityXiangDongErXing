@@ -42,6 +42,9 @@ public class MapChunk
         DestroyGround(chunkCoord*mapConfig.chunkSize,mapConfig.chunkSize);
         DestoryMapDecorations();
         //销毁装饰物
+
+        //销毁敌人
+        DestroyEnemys();
     }
 
     //生成地图块中的段
@@ -73,7 +76,7 @@ public class MapChunk
         }
     }
     //生成敌人
-    private void CreateEnemys(int startCoord, int size, bool secondFloor)
+    private void CreateEnemys(int startCell, int size, bool secondFloor)
     {
         //怪物生成没必要基于种子随机
         MapSpawnEnemyConfig spawnEnemyConfig = mapConfig.mapSpawnEnemyConfig;
@@ -87,15 +90,11 @@ public class MapChunk
             //随机生成怪物
             for(int i = 0; i < count; i++)
             {
-                
-                EnemyController enemyController=GameObject.Instantiate(spawnEnemyConfig.
-                    prefabs[UnityEngine.Random.Range(0, spawnEnemyConfig.prefabs.Count)])
-                    .GetComponent<EnemyController>();
-                int coord = UnityEngine.Random.Range(0, size) + startCoord;
+                GameObject prefab = spawnEnemyConfig.prefabs[UnityEngine.Random.Range(0, spawnEnemyConfig.prefabs.Count)];
+                int coord = UnityEngine.Random.Range(0, size) + startCell;
                 Vector3 pos = new Vector3(MapController.current.GetCellWorldPostion(coord),
                     MapController.current.GetLayerWorldPosition(secondFloor), 0);
-                enemyController.transform.position = pos;
-                enemyController.Init();
+                MapController.current.EnemyManager.AddEnemy(prefab, chunkCoord,pos);
             }
         }
     }
@@ -178,6 +177,12 @@ public class MapChunk
         groundTileMap = null;
         decorationRoot = null;
         chunkRandom = null;
+    }
+
+    //销毁敌人
+    private void DestroyEnemys()
+    {
+        MapController.current.EnemyManager.RemoveMapchunkEnemys(chunkCoord);
     }
 
     public void SetActive(bool active)

@@ -1406,6 +1406,7 @@ GameObject:
   - component: {fileID: 1919217558}
   - component: {fileID: 1919217560}
   - component: {fileID: 1919217559}
+  - component: {fileID: 1919217561}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -1463,11 +1464,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParallaxScrollingController: {fileID: 1919217559}
   cameraController: {fileID: 591653408}
+  enemyManager: {fileID: 1919217561}
   decorationRoot: {fileID: 304773534}
   mapConfig: {fileID: 11400000, guid: 2a88a6a74c27a3745b847ba4fa03cba7, type: 2}
   groundTileMap: {fileID: 1577170971}
   mapSeed: 0
   playerController: {fileID: 2089924974}
+--- !u!114 &1919217561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919217557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61d3b66733ba2e942bbdde6b2ce70697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2089924971
 GameObject:
   m_ObjectHideFlags: 0

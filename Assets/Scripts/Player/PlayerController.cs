@@ -51,4 +51,9 @@ public class PlayerController : CharacterControllerBase<PlayerView>
             }
         }
     }
+
+    protected override void Die()
+    {
+        
+    }
 }

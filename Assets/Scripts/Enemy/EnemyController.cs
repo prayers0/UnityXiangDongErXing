@@ -14,6 +14,7 @@ public class EnemyController : CharacterControllerBase<EnemyView>
     private Coroutine doKnockbackCoroutine;
     private bool pursueState;
     private bool patrolDirIsRight;
+    private int currentMapChunkCoord;
     //private void Start()
     //{
     //    Init();
@@ -27,8 +28,25 @@ public class EnemyController : CharacterControllerBase<EnemyView>
 
     }
 
+    public void Init(int mapChunkCoord)
+    {
+        this.currentMapChunkCoord = mapChunkCoord;
+        Init();
+    }
+
+    private void UpdateMapChunk()
+    {
+        int newMapChunkCoord = MapController.current.GetChunkCoord(transform.position.x);
+        if (newMapChunkCoord != currentMapChunkCoord)
+        {
+            MapController.current.EnemyManager.UpdateEnemyChunk(this, currentMapChunkCoord, newMapChunkCoord);
+            currentMapChunkCoord = newMapChunkCoord;
+        }
+    }
+
     private void LateUpdate()
     {
+        UpdateMapChunk();
         if (!MapController.current.hasPlayer) return;
         if (SkillState()) return;
         float currentPosX = transform.position.x;
@@ -111,5 +129,10 @@ public class EnemyController : CharacterControllerBase<EnemyView>
         float dis = MathF.Abs(MapController.current.lastCameraPosx - transform.position.x);
         if (dis == 0) dis = 0.001f;
         AudioManager.Instance.PlayerAudio(audioClip, volum * (1 / dis));
+    }
+
+    protected override void Die()
+    {
+        MapController.current.EnemyManager.RemoveEnemy(this, currentMapChunkCoord);
     }
 }

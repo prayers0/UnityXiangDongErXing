@@ -280,6 +280,7 @@ MonoBehaviour:
   rigidbody: {fileID: 9181577119102019764}
   moveSpeed: 3
   jumpPower: 12
+  maxHp: 100
   weapon: {fileID: 9181577117510934591}
   skillDatas:
   - animationName: Attack1

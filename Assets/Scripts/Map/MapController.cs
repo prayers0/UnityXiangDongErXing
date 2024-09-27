@@ -9,12 +9,14 @@ using Unity.VisualScripting;
 using System.Security.Cryptography.X509Certificates;
 using System.ComponentModel;
 using UnityEngine.EventSystems;
+using static UnityEditor.PlayerSettings;
 
 public class MapController : MonoBehaviour
 {
     public static MapController current;
     [SerializeField] private ParallaxScrollingController ParallaxScrollingController;
     [SerializeField] private CameraController cameraController;
+    [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private Transform decorationRoot;
     [SerializeField] private MapConfig mapConfig;
 
@@ -26,6 +28,7 @@ public class MapController : MonoBehaviour
     //key地图块索引，value：地图块对象
     private Dictionary<int,MapChunk> mapChunkDic = new Dictionary<int,MapChunk>();
     private float cellSize;//格子尺寸
+    public EnemyManager EnemyManager { get=>enemyManager; }
 
     private float halfCellSize;//地图种子
 
@@ -154,6 +157,11 @@ public class MapController : MonoBehaviour
     public float GetLayerWorldPosition(bool secondLayer)
     {
         return cellSize * (secondLayer ? 2 : 1) ;
+    }
+
+    public int GetChunkCoord(float pos)
+    {
+        return (int)(pos / cellSize/mapConfig.chunkSize);
     }
 }
 

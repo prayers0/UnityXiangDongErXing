@@ -6,12 +6,13 @@ public interface ICharacterController
 {
     Transform transform { get; }
 }
-public class CharacterControllerBase<V> : MonoBehaviour,ICharacterController,IDamageable where V : CharacterViewBase
+public abstract class CharacterControllerBase<V> : MonoBehaviour,ICharacterController,IDamageable where V : CharacterViewBase
 {
     [SerializeField] protected V view;
     [SerializeField] protected new Rigidbody2D rigidbody;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float jumpPower;
+    [SerializeField] protected float maxHp;
     [SerializeField] protected Weapon weapon;
     [SerializeField] protected SkillData[] skillDatas;
 
@@ -19,11 +20,28 @@ public class CharacterControllerBase<V> : MonoBehaviour,ICharacterController,IDa
     [SerializeField] protected AudioClip[] footStepClips;
 
     protected SkillData currentSkill;
+    protected float currentHP;
+
+    protected float CurrentHP 
+    {
+        get => currentHP;
+        set
+        {
+            if (currentHP == value) return;
+            currentHP = value;
+            if (currentHP <= 0)
+            {
+                currentHP = 0;
+                Die();
+            }
+        } 
+    }
 
     public virtual void Init()
     {
         view.Init(OnFootStep, OnSkillStop);
         weapon.Init(OnHit);
+        CurrentHP = maxHp;
     }
 
     protected bool JumpState()
@@ -133,7 +151,10 @@ public class CharacterControllerBase<V> : MonoBehaviour,ICharacterController,IDa
     public virtual void Hurt(float damage, ICharacterController source, SkillData.HitData hitData)
     {
         view.PlayHurtAnimation();
+        CurrentHP -= damage;
     }
 
-    
+    //À¿Õˆ
+    protected abstract void Die();
+
 }
