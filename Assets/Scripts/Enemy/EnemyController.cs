@@ -121,7 +121,7 @@ public class EnemyController : CharacterControllerBase<EnemyView>
     protected override void OnFootStep()
     {
         if (footStepClips.Length == 0) return;
-        PlayerSpaceAudio(footStepClips[UnityEngine.Random.Range(0, footStepClips.Length)], 0.5f);
+        PlayerSpaceAudio(footStepClips[UnityEngine.Random.Range(0, footStepClips.Length)], 0.3f);
     }
 
     private void PlayerSpaceAudio(AudioClip audioClip,float volum)

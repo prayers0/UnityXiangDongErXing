@@ -1,18 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_MenuSceneMainWindow : UI_WindowBase
 {
-    // Start is called before the first frame update
-    void Start()
+    public Button newGameButton;
+    public Button continueButton;
+    public Button settingButton;
+    public Button quitButton;
+
+    public override void OnShow()
+    {
+        newGameButton.onClick.AddListener(NewGameButtonClick);
+        continueButton.onClick.AddListener(ContinueButtonClick);
+        if (!SaveManager.ExistGameData())
+        {
+            continueButton.gameObject.SetActive(false);
+        }
+        settingButton.onClick.AddListener(SettingButtonClick);
+        quitButton.onClick.AddListener(quitButtonClick);
+    }
+
+    private void NewGameButtonClick()
+    {
+        GameManager.Instance.NewGame();
+    }
+
+    private void ContinueButtonClick()
+    {
+        GameManager.Instance.ContinueGame();
+    }
+
+    private void SettingButtonClick()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void quitButtonClick()
     {
-        
+        Application.Quit();
     }
 }

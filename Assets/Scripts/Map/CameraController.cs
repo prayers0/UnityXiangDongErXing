@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -14,13 +12,17 @@ public class CameraController : MonoBehaviour
         this.targetTransform = targetTransform;
         Camera camera=GetComponent<Camera>();
         screenWidth = camera.aspect * camera.orthographicSize*2;
+        transform.position = new Vector3(targetTransform.position.x+offest, transform.position.y, transform.position.z);
     }
 
     private void LateUpdate()
     {
-        Vector3 target = transform.position;
-        target.x = Mathf.Clamp(targetTransform.position.x + offest,screenWidth/2f,float.MaxValue);
-        transform.position=Vector3.Lerp(transform.position, target, moveSpeed*Time.deltaTime);
+        if (targetTransform != null)
+        {
+            Vector3 target = transform.position;
+            target.x = Mathf.Clamp(targetTransform.position.x + offest, screenWidth / 2f, float.MaxValue);
+            transform.position = Vector3.Lerp(transform.position, target, moveSpeed * Time.deltaTime);
+        }
     }
     
 }

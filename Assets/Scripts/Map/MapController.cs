@@ -38,15 +38,16 @@ public class MapController : MonoBehaviour
 
     private void Awake()
     {
-        Init(mapSeed,playerController);
+        //Init(mapSeed,playerController);
         //CreateMapChunk(0);
-        
+        current = this;
     }
 
     public void Init(int mapSeed,PlayerController playerController)
     {
         current = this;
         this.mapSeed = mapSeed;
+        this.playerController = playerController;
         groundTileMap.ClearAllTiles();
 
         Grid grid = GetComponentInChildren<Grid>();
@@ -57,6 +58,13 @@ public class MapController : MonoBehaviour
     }
 
     private void LateUpdate()
+    {
+        if (!hasPlayer) return;
+        UpdateMapChunk();
+        CheckMapChunkDestroy();
+    }
+
+    public void UpdateMapChunk()
     {
         if (cameraController.transform.position.x != lastCameraPosx)
         {
@@ -69,7 +77,6 @@ public class MapController : MonoBehaviour
             CheckMapChunkCreation(oldTargetPosX, newTargetPosX);
             lastCameraPosx = newTargetPosX;
         }
-        CheckMapChunkDestroy();
     }
 
     //检查地图快的生成

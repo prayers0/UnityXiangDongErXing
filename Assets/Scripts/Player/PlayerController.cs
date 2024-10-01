@@ -1,16 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : CharacterControllerBase<PlayerView>
 {
+    public static PlayerController Instance { get; private set; }
     private int currentSkillIndex=0;
-    private void Start()
-    {
-        Init();
-    }
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     public override void Init()
     {
         base.Init();

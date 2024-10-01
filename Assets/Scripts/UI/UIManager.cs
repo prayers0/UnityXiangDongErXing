@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
             GameObject prefab=GetUIPrefab(windowName);
             window = GameObject.Instantiate(prefab, transform).GetComponent<T>();
             window.OnShow();
+            windowCache.Add(windowName, window);
         }
         return (T)window;
     }
