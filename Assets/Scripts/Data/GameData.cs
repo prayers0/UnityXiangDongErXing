@@ -23,11 +23,11 @@ public struct SVector3//可以序列化的向量
         this.z = z;
     }
 
-    public SVector3(Vector3 v3)
+    public SVector3(UnityEngine.Vector3 v3)
     {
-        this.x=v3.X; 
-        this.y=v3.Y; 
-        this.z=v3.Z;
+        this.x=v3.x; 
+        this.y=v3.y; 
+        this.z=v3.z;
     }
 
     public UnityEngine. Vector3 ToVectr3()

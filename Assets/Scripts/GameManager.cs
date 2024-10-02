@@ -46,5 +46,10 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void LoadMenuScene()
+    {
+        UIManager.Instance.CloseAllWindow();
+        SceneManager.LoadScene("Menu");
+    }
 
 }

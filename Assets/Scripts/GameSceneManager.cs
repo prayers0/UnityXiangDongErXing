@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -14,5 +15,13 @@ public class GameSceneManager : MonoBehaviour
         MapController.current.Init(GameManager.Instance.gameData.mapSeed, PlayerController.Instance);
         MapController.current.UpdateMapChunk();
         //UIManager.Instance.CloseWindow<UI_BlackCanvasDropWindow>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIManager.Instance.ShowWindow<UI_GameScenePopUpWindow>();
+        }
     }
 }

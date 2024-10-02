@@ -48,10 +48,17 @@ public class PlayerController : CharacterControllerBase<PlayerView>
                 }
             }
         }
+        UpdatePlayerPositionData();
     }
 
     protected override void Die()
     {
         
+    }
+
+    protected void UpdatePlayerPositionData()
+    {
+        GameManager.Instance.gameData.playerPos = new SVector3(transform.position);
+
     }
 }

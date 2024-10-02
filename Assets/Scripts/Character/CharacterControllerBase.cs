@@ -64,7 +64,7 @@ public abstract class CharacterControllerBase<V> : MonoBehaviour,ICharacterContr
         return !SkillState();//ÊÍ·Å¼¼ÄÜ
     }
 
-    public void Move(float h,bool filp=true,bool autoAnimation = true)
+    protected virtual void Move(float h,bool filp=true,bool autoAnimation = true)
     {
         bool runState = h != 0;
         rigidbody.velocity = new Vector3(h * moveSpeed, rigidbody.velocity.y, 0);

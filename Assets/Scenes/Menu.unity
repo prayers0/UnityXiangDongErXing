@@ -436,6 +436,7 @@ MonoBehaviour:
   windowPrefabfabList:
   - {fileID: 2142362145410320331, guid: a35bca6d0ab9b0e4a8dc9e0f67cd324d, type: 3}
   - {fileID: 4882018227754433123, guid: a3417742094622347a74d47c99434af9, type: 3}
+  - {fileID: 2142362145410320331, guid: e8b65716b17ae45439ea53d183091828, type: 3}
 --- !u!1 &1668356432
 GameObject:
   m_ObjectHideFlags: 0
