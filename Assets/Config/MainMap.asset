@@ -79,7 +79,6 @@ MonoBehaviour:
     - {fileID: 3466428726607644932, guid: 909798396b0887c43a1b85c9592a5df7, type: 3}
     - {fileID: 5598412547105681084, guid: f110a50801410484681389ec001e643c, type: 3}
     - {fileID: 8871231285016625493, guid: f76de9c279bf77a4e9321005cfbfbe10, type: 3}
-    - {fileID: 4417697272166143068, guid: dc899ca10d700654c9165c0279b70da9, type: 3}
     - {fileID: 2942185491321363474, guid: d6fb74524265eef4a82b7e9c4c06cd8e, type: 3}
     - {fileID: 3745586523731858593, guid: 66d0960bf03bc8446aa0508bc677962b, type: 3}
     - {fileID: 276180531773344631, guid: e848dfbe9cd0a0644a032e144e2a150f, type: 3}
@@ -89,3 +88,10 @@ MonoBehaviour:
     prefabs:
     - {fileID: 9181577119102019765, guid: 30a9bdf17e0e96c469960148875cab1c, type: 3}
     - {fileID: 814689394543574218, guid: 43851f8d5902c234289546b3706e169e, type: 3}
+  mapDoorConfig:
+    chunkStep: 1
+    layer: MapDecoration3
+    probaility: 1
+    prefab:
+    - {fileID: 4417697272166143068, guid: dc899ca10d700654c9165c0279b70da9, type: 3}
+    - {fileID: 7032325535486344649, guid: d1cd41edf86c1b04fa8f2300aadbefbb, type: 3}

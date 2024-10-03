@@ -14,7 +14,7 @@ public class MapConfig : ScriptableObject
     //生成时每一层之间互不干扰
     public List<MapDecorationLayerConfig> mapDecorationConfigs = new List<MapDecorationLayerConfig>();
     public MapSpawnEnemyConfig mapSpawnEnemyConfig;
-
+    public MapDungeonDoorConfig mapDoorConfig;
 }
 
 [Serializable]
@@ -22,16 +22,26 @@ public  class MapDecorationLayerConfig
 {
     public string name;//名称。无意义
     public string layer;//这一层物体生成后的精灵渲染器的层设置
-    public float probaility;//生成概率0~1
+    [Range(0,1f)]public float probaility;//生成概率0~1
     public int size;//占据几个格子兮，建筑物5，树木2花草1
     public Vector2 xOffsetRange;//格子内物体的随机偏移范围
     public List<GameObject> prefab;//预制体随机选取一个
 }
 
 [Serializable]
+public class MapDungeonDoorConfig
+{
+    public int chunkStep;//多少个地图块计算一次
+    public string layer; //生成后的精灵渲染器的层设置
+    [Range(0, 1f)] public float probaility;//生成概率0~1
+    public List<GameObject> prefab;//预制体随机选取一个
+}
+
+
+[Serializable]
 public class MapSpawnEnemyConfig
 {
-    public float spawnProbability;//是否生成的概率
+    [Range(0, 1f)] public float spawnProbability;//是否生成的概率
     public Vector2Int spawnCountRange;//生成数量的范围
     public List<GameObject> prefabs;
 }

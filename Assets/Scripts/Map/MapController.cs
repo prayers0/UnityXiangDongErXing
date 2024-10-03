@@ -119,7 +119,7 @@ public class MapController : MonoBehaviour
         {
             mapChunk = new MapChunk();
             mapChunkDic.Add(chunkCoord, mapChunk);
-            mapChunk.Init(mapConfig, groundTileMap, decorationRoot, chunkCoord, mapSeed, cellSize, halfCellSize);
+            mapChunk.Init(mapConfig, groundTileMap,transform, decorationRoot, chunkCoord, mapSeed, cellSize, halfCellSize);
         }
        
     }
