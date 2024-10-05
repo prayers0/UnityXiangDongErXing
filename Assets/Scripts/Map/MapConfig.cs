@@ -8,6 +8,10 @@ using UnityEngine.Tilemaps;
 public class MapConfig : ScriptableObject
 {
     public TileBase groundTile;
+    public TileBase topTile;
+    public int groundTileCoordY = 0;
+    public int topTileCoordY = 0;
+    public Vector3 playerDefaultPosition = new Vector3(1, 5.5f, 0);
     public float mapChunkDestroyTime = 5;
     public int chunkSize = 50;//地图块的尺寸
     public Vector2Int chunkSegmentSizeRange = new Vector2Int(2, 11);//地图块的尺寸2~10
@@ -34,6 +38,7 @@ public class MapDungeonDoorConfig
     public int chunkStep;//多少个地图块计算一次
     public string layer; //生成后的精灵渲染器的层设置
     [Range(0, 1f)] public float probaility;//生成概率0~1
+    public bool isEntrance;//是否是入口，决定进入什么地图
     public List<GameObject> prefab;//预制体随机选取一个
 }
 
@@ -43,5 +48,6 @@ public class MapSpawnEnemyConfig
 {
     [Range(0, 1f)] public float spawnProbability;//是否生成的概率
     public Vector2Int spawnCountRange;//生成数量的范围
+    public int minSegmentSize = 5;//最小的怪物生成段落尺寸
     public List<GameObject> prefabs;
 }

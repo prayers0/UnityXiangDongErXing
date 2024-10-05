@@ -57,6 +57,11 @@ public class MapController : MonoBehaviour
         ParallaxScrollingController.Init(cameraController.screenWidth);
     }
 
+    public Vector3 GetPlayerDefaultPosition()
+    {
+        return mapConfig.playerDefaultPosition;
+    }
+
     private void LateUpdate()
     {
         if (!hasPlayer) return;

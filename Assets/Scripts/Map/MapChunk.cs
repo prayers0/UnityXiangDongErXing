@@ -81,7 +81,10 @@ public class MapChunk
             bool secondFloor = random.Next(0, 2) == 0;
             int segmentStartCoord = start + currentCoord;
             CreateGround(segmentStartCoord, segmentSize, secondFloor);//创建地面
-            CreateEnemys(segmentStartCoord, segmentSize, secondFloor);
+            if (chunkCoord != 0 || segmentStartCoord!= 0)//避免第一个地图块的第一个地图段就生成敌人
+            {
+                CreateEnemys(segmentStartCoord, segmentSize, secondFloor);
+            }
             if (haveDoor && segmentSize == mapConfig.chunkSize - currentCoord)//需要门并且当前是最后一段
             {
                 CreateDoor(segmentStartCoord, segmentSize, secondFloor, random);
@@ -113,7 +116,7 @@ public class MapChunk
         {
             spriteRenderer.sortingLayerName = doorConfig.layer;
         }
-      
+        door.GetComponent<Door>().Init(doorConfig);
     }
 
     private void DestroyDoor()
@@ -128,6 +131,7 @@ public class MapChunk
     //生成敌人
     private void CreateEnemys(int startCell, int size, bool secondFloor)
     {
+        if (size < mapConfig.mapSpawnEnemyConfig.minSegmentSize) return;
         //怪物生成没必要基于种子随机
         MapSpawnEnemyConfig spawnEnemyConfig = mapConfig.mapSpawnEnemyConfig;
 
@@ -155,10 +159,18 @@ public class MapChunk
         //填充tileMap
         for (int i = 0; i < size; i++)
         {
-            groundTileMap.SetTile(new Vector3Int(startCoord + i, 0, 0), mapConfig.groundTile);
-            if (secondFloor)
+            if (mapConfig.groundTile != null)
             {
-                groundTileMap.SetTile(new Vector3Int(startCoord + i, 1, 0), mapConfig.groundTile);
+                groundTileMap.SetTile(new Vector3Int(startCoord + i, mapConfig.groundTileCoordY, 0), mapConfig.groundTile);
+                if (secondFloor)
+                {
+                    groundTileMap.SetTile(new Vector3Int(startCoord + i, mapConfig.groundTileCoordY+1, 0), mapConfig.groundTile);
+                }
+            }
+
+            if (mapConfig.topTile != null)
+            {
+                groundTileMap.SetTile(new Vector3Int(startCoord + i, mapConfig.topTileCoordY, 0), mapConfig.topTile);
             }
         }
 

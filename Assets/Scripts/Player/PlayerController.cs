@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : CharacterControllerBase<PlayerView>
@@ -60,5 +61,17 @@ public class PlayerController : CharacterControllerBase<PlayerView>
     {
         GameManager.Instance.gameData.playerPos = new SVector3(transform.position);
 
+    }
+
+    public void OnDoorStay(int doorCoord, bool isEntrance)
+    {
+        if (isEntrance && Input.GetKey(KeyCode.S))
+        {
+            GameSceneManager.Instance.EnterDungeonMap(doorCoord);
+        }
+        else if (!isEntrance && Input.GetKey(KeyCode.W))
+        {
+            GameSceneManager.Instance.LoadMainMap();
+        }
     }
 }

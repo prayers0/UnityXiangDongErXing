@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf81ff6cf650b3a4ea967f0f7325572e, type: 3}
+  m_Name: DungeonMap
+  m_EditorClassIdentifier: 
+  groundTile: {fileID: 11400000, guid: 779ad141c1ba80044b05029b72da6b08, type: 2}
+  topTile: {fileID: 11400000, guid: a8c257d2facc90e42a491a8833fa7822, type: 2}
+  groundTileCoordY: 0
+  topTileCoordY: 4
+  playerDefaultPosition: {x: 1, y: 5.5, z: 0}
+  mapChunkDestroyTime: 1
+  chunkSize: 50
+  chunkSegmentSizeRange: {x: 2, y: 8}
+  mapDecorationConfigs:
+  - name: "\u5C0F\u4E1C\u897F"
+    layer: MapDecoration1
+    probaility: 0.7
+    size: 1
+    xOffsetRange: {x: -1, y: 1}
+    prefab:
+    - {fileID: 305356535499201946, guid: f4ee40751cd65114b8cca2463eb18c0f, type: 3}
+    - {fileID: 2924128335841579982, guid: 925aaba7fd00de248ba1d56352b98a15, type: 3}
+    - {fileID: 4350212469720406733, guid: fc5587ee5e7f34243ad5a0a8369bcabd, type: 3}
+    - {fileID: 5536541243977805603, guid: 9330ea6e9314b8045b6238eab0638cb3, type: 3}
+    - {fileID: 6695106505090411264, guid: 8c4cd9187a41c0f41a4873ac02bc9faa, type: 3}
+    - {fileID: 4166098230891617471, guid: 09c1faba346e1b946833dd7a94b393a5, type: 3}
+    - {fileID: 1602974487360248024, guid: b6569f5cf728267429cd2992fb84b89d, type: 3}
+    - {fileID: 4628080818296494032, guid: 6bd135f597db10845a5a2edb77189b5a, type: 3}
+    - {fileID: 3195873948282995536, guid: 5572fd0a4636a8b4fada7145cf0128b4, type: 3}
+    - {fileID: 3499215498478938427, guid: 00d3d6821568c8b4697029fed041b1e4, type: 3}
+    - {fileID: 3510254909091030953, guid: 19f9e70e2c2d7e0488a371a1d95ec6cc, type: 3}
+    - {fileID: 4293501151819884950, guid: f83f157d705f0814ab6c089fd43f512c, type: 3}
+    - {fileID: 8507979459325718485, guid: f87e96a8c237bc14f993dbc70a5bcff7, type: 3}
+    - {fileID: 163806864763599104, guid: 820ad46ef2dee7248b511acab11411f3, type: 3}
+    - {fileID: 5879879645877620648, guid: 4b74c4a6b0a89b543b59cf34d036343c, type: 3}
+    - {fileID: 2426080831838630682, guid: 8654bec156c80e446ae3fc1e2716a3f6, type: 3}
+  - name: "\u5927\u77F3\u5934"
+    layer: MapDecoration2
+    probaility: 0.437
+    size: 2
+    xOffsetRange: {x: -1.5, y: 1.5}
+    prefab:
+    - {fileID: 5548129044408795863, guid: 5753e535a6d31014caea065916b40c61, type: 3}
+    - {fileID: 6186274522420475017, guid: 8c31ee7eba9355a4fa24bf2d2f716a6c, type: 3}
+    - {fileID: 6632826223260428963, guid: 12591587cccee6543816f8ab22e5547c, type: 3}
+    - {fileID: 6262696616004820329, guid: 3be382b11a986a047b776bdc55c5ecc1, type: 3}
+  mapSpawnEnemyConfig:
+    spawnProbability: 0
+    spawnCountRange: {x: 0, y: 3}
+    minSegmentSize: 5
+    prefabs: []
+  mapDoorConfig:
+    chunkStep: 1
+    layer: MapDecoration3
+    probaility: 1
+    isEntrance: 1
+    prefab:
+    - {fileID: 7032325535486344649, guid: d1cd41edf86c1b04fa8f2300aadbefbb, type: 3}
