@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
         transform.position = new Vector3(ClampX(targetTransform.position.x + offest), transform.position.y, transform.position.z);
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         if (targetTransform != null)
         {

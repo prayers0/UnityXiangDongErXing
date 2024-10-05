@@ -175,6 +175,11 @@ public class MapController : MonoBehaviour
     {
         return (int)(pos / cellSize/mapConfig.chunkSize);
     }
+
+    public void Destroy()
+    {
+        GameObject.Destroy(gameObject);
+    }
 }
 
     

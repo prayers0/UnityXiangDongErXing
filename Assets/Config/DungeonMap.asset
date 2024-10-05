@@ -62,6 +62,6 @@ MonoBehaviour:
     chunkStep: 1
     layer: MapDecoration3
     probaility: 1
-    isEntrance: 1
+    isEntrance: 0
     prefab:
     - {fileID: 7032325535486344649, guid: d1cd41edf86c1b04fa8f2300aadbefbb, type: 3}

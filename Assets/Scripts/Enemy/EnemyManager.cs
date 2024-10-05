@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
     private Dictionary<int,HashSet<EnemyController>> enemyDic=new Dictionary<int,HashSet<EnemyController>>();
     public void AddEnemy(GameObject prefab,int mapChunkCoord, Vector3 pos)
     {
-        EnemyController enemyController = GameObject.Instantiate(prefab).GetComponent<EnemyController>();
+        EnemyController enemyController = GameObject.Instantiate(prefab,transform).GetComponent<EnemyController>();
         
         enemyController.transform.position = pos;
         enemyController.Init();
