@@ -1,19 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System;
-using Random = System.Random;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using System.Security.Cryptography.X509Certificates;
-using System.ComponentModel;
-using UnityEngine.EventSystems;
-using static UnityEditor.PlayerSettings;
 
 public class MapController : MonoBehaviour
 {
     public static MapController current;
+    public static bool HaveMap=>current!=null&&current.gameObject!=null;
     [SerializeField] private ParallaxScrollingController ParallaxScrollingController;
     [SerializeField] private CameraController cameraController;
     [SerializeField] private EnemyManager enemyManager;
@@ -179,6 +171,7 @@ public class MapController : MonoBehaviour
     public void Destroy()
     {
         GameObject.Destroy(gameObject);
+        current = null;
     }
 }
 

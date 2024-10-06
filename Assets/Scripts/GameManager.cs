@@ -25,8 +25,9 @@ public class GameManager : MonoBehaviour
         //¹¹½¨Ä¬ÈÏ´æµµ
         gameData = new GameData
         {
-            playerPos = new SVector3(10, 5.5f, 0),
+            //playerMainPos = new SVector3(10, 5.5f, 0),
             mapSeed = Random.Range(int.MinValue, int.MaxValue),
+            onMainMap = true
         };
         SaveGameData();
         SceneManager.LoadScene("Game");

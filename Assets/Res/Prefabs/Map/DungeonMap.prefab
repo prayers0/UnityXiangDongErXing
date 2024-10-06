@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &775367164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 775367165}
+  m_Layer: 0
+  m_Name: DecorationRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &775367165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775367164}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -18.000471, y: 0.6324501, z: -7.0158215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3105014518505187328}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3105014517491537765
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,6 +925,7 @@ Transform:
   - {fileID: 3105014518014848039}
   - {fileID: 3105014518359849564}
   - {fileID: 3105014517680680329}
+  - {fileID: 775367165}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -912,7 +944,7 @@ MonoBehaviour:
   ParallaxScrollingController: {fileID: 3105014518505187329}
   cameraController: {fileID: 3105014517680680374}
   enemyManager: {fileID: 3105014518505187343}
-  decorationRoot: {fileID: 0}
+  decorationRoot: {fileID: 775367165}
   mapConfig: {fileID: 11400000, guid: cddbfb4a03d0d564194d8dc222aa04a0, type: 2}
   groundTileMap: {fileID: 3105014518028959629}
   mapSeed: 0

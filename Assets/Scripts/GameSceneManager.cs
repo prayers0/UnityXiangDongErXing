@@ -14,12 +14,13 @@ public class GameSceneManager : MonoBehaviour
     }
     private void  Start()
     {
+        PlayerController.Instance.Init();
+
+        if (gameData.onMainMap) LoadMainMap();
+        else LoadDungeonMap();
         //ºÚÄ»ÕÚµ²
         //UIManager.Instance.ShowWindow<UI_BlackCanvasDropWindow>();
-        PlayerController.Instance.transform.position = GetMainMapPlayerPosition();
-        PlayerController.Instance.Init();
-        MapController.current.Init(GameManager.Instance.gameData.mapSeed, PlayerController.Instance);
-        MapController.current.UpdateMapChunk();
+        
         //UIManager.Instance.CloseWindow<UI_BlackCanvasDropWindow>();
     }
 
@@ -33,40 +34,82 @@ public class GameSceneManager : MonoBehaviour
 
     public void LoadMainMap()
     {
-        throw new NotImplementedException();
+        gameData.onMainMap = true;
+        if (MapController.HaveMap)
+        {
+            MapController.current.Destroy();
+        }
+        
+        MapController mapController = Instantiate(mainMapPrefab).GetComponent<MapController>();
+        PlayerController.Instance.transform.position = GetMainMapPlayerPosition();
+        mapController.Init(gameData.mapSeed, PlayerController.Instance);
+        mapController.UpdateMapChunk();
+    }
+
+
+    private void LoadDungeonMap()
+    {
+        gameData.onMainMap = false;
+        if (MapController.HaveMap)
+        {
+            MapController.current.Destroy();
+        }
+        
+        MapController mapController = Instantiate(dungeonMapPrefab).GetComponent<MapController>();
+        PlayerController.Instance.transform.position = GetDungeonMapPlayerPosition();
+        int seed = (gameData.mapSeed + 100) / 2 + gameData.dungeonCoord;
+        mapController.Init(seed, PlayerController.Instance);
+        mapController.UpdateMapChunk();
     }
 
     public void EnterDungeonMap(int doorCoord)
     {
-        MapController.current.Destroy();
+        gameData.onMainMap = false;
+        if (MapController.HaveMap)
+        {
+            MapController.current.Destroy();
+        }
         MapController mapController=Instantiate(dungeonMapPrefab).GetComponent<MapController>();
+        gameData.playerDungeonMapPos = default;
         PlayerController.Instance.transform.position=GetDungeonMapPlayerPosition();
         int seed = (gameData.mapSeed + 100) / 2 + doorCoord;
+        gameData.dungeonCoord = seed;
         mapController.Init(seed,PlayerController.Instance);
         mapController.UpdateMapChunk();
     }
 
     private Vector3 GetMainMapPlayerPosition()
     {
-        Vector3 pos = gameData.playerPos.ToVectr3();
+        Vector3 pos = gameData.playerMainPos.ToVectr3();
         if (pos == default)
         {
             pos = MapController.current.GetPlayerDefaultPosition();
-            gameData.playerPos = new SVector3(pos);
+            gameData.playerMainPos = new SVector3(pos);
         }
         return pos;
     }
 
     private Vector3 GetDungeonMapPlayerPosition()
     {
-        Vector3 pos = default;
-
-        //Vector3 pos = gameData.playerPos.ToVectr3();
+        //Vector3 pos = default;
+        Vector3 pos = gameData.playerDungeonMapPos.ToVectr3();
         if (pos == default)
         {
             pos = MapController.current.GetPlayerDefaultPosition();
-            gameData.playerPos = new SVector3(pos);
+            gameData.playerDungeonMapPos = new SVector3(pos);
         }
         return pos;
+    }
+
+    public void UpdatePlayerPositionData(Vector3 position)
+    {
+        if (gameData.onMainMap)
+        {
+            gameData.playerMainPos=new SVector3(position);
+        }
+        else
+        {
+            gameData.playerDungeonMapPos = new SVector3(position);
+        }
     }
 }

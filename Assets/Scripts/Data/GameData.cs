@@ -7,8 +7,11 @@ using Vector3 = System.Numerics.Vector3;
 [Serializable]
 public class GameData
 {
-    public SVector3 playerPos;
+    public SVector3 playerMainPos;
+    public SVector3 playerDungeonMapPos;
     public int mapSeed;
+    public int dungeonCoord;
+    public bool onMainMap;
 }
 
 [Serializable]

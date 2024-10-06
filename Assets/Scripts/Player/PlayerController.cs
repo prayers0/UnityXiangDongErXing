@@ -59,8 +59,7 @@ public class PlayerController : CharacterControllerBase<PlayerView>
 
     protected void UpdatePlayerPositionData()
     {
-        GameManager.Instance.gameData.playerPos = new SVector3(transform.position);
-
+        GameSceneManager.Instance.UpdatePlayerPositionData(transform.position);
     }
 
     public void OnDoorStay(int doorCoord, bool isEntrance)
