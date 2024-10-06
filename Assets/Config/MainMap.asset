@@ -19,6 +19,7 @@ MonoBehaviour:
   playerDefaultPosition: {x: 1, y: 5.5, z: 0}
   mapChunkDestroyTime: 1
   chunkSize: 50
+  maxChunk: -1
   chunkSegmentSizeRange: {x: 2, y: 11}
   mapDecorationConfigs:
   - name: "\u82B1\u8349"
@@ -75,7 +76,7 @@ MonoBehaviour:
   - name: "\u5EFA\u7B51\u7269"
     layer: MapDecoration3
     probaility: 0.7
-    size: 5
+    size: 6
     xOffsetRange: {x: 0, y: 0}
     prefab:
     - {fileID: 4697524222447109196, guid: dce6c994e34a8a545a9e817ed48f1fa9, type: 3}

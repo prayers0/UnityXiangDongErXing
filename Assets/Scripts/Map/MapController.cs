@@ -13,6 +13,8 @@ public class MapController : MonoBehaviour
     [SerializeField] private MapConfig mapConfig;
 
     [SerializeField] private Tilemap groundTileMap;
+    [SerializeField] private BoxCollider2D rightWall;
+    
     [SerializeField] private int mapSeed;//地图种子
     [SerializeField] private PlayerController playerController; //玩家应该有更上级的管理器初始化得来
     public bool hasPlayer => playerController != null;
@@ -45,8 +47,17 @@ public class MapController : MonoBehaviour
         Grid grid = GetComponentInChildren<Grid>();
         cellSize = grid.cellSize.x;
         halfCellSize = cellSize / 2;
-        cameraController.Init(playerController.transform);
+       
+        float maxPosX = -1;
+        if (mapConfig.maxChunk > 0)
+        {
+            maxPosX = mapConfig.chunkSize * mapConfig.maxChunk * cellSize;
+            Vector3 pos = new Vector3(maxPosX + rightWall.size.x, 0, 0);
+            rightWall.transform.position = pos;
+        }
+        cameraController.Init(playerController.transform,maxPosX);
         ParallaxScrollingController.Init(cameraController.screenWidth);
+
     }
 
     public Vector3 GetPlayerDefaultPosition()

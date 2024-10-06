@@ -14,6 +14,7 @@ public class MapConfig : ScriptableObject
     public Vector3 playerDefaultPosition = new Vector3(1, 5.5f, 0);
     public float mapChunkDestroyTime = 5;
     public int chunkSize = 50;//地图块的尺寸
+    public int maxChunk = -1;//-1代表无限无效
     public Vector2Int chunkSegmentSizeRange = new Vector2Int(2, 11);//地图块的尺寸2~10
     //生成时每一层之间互不干扰
     public List<MapDecorationLayerConfig> mapDecorationConfigs = new List<MapDecorationLayerConfig>();
