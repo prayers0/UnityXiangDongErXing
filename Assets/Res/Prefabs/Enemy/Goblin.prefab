@@ -86,23 +86,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 814689394855061765}
   rigidbody: {fileID: 814689394543574219}
-  moveSpeed: 5
+  moveSpeed: 3
   jumpPower: 12
   maxHp: 100
   weapon: {fileID: 814689396203336768}
   skillDatas:
   - animationName: Attack1
     attackValue: 20
-    releaseOnJump: 1
     canMove: 1
-    fanFilp: 1
     moveSpeedMultiply: 0.2
+    releaseAudio: {fileID: 8300000, guid: 73552316b142dd147bcd1884fa6cd2f2, type: 3}
+    hitClip: {fileID: 8300000, guid: 8d26b21614ef1d343bac928da5f1123d, type: 3}
+    releaseOnJump: 1
+    fanFilp: 1
     moveSpeedMultiplyOnJump: 1
-    releaseAudio: {fileID: 0}
-    hitClip: {fileID: 0}
     hitData:
       knockbackSpeed: 0
       knockbackTime: 0
+    attackRange: {x: 0, y: 1.2}
   footStepClips:
   - {fileID: 8300000, guid: 92d40e7aec0849243b63a943f83882df, type: 3}
   - {fileID: 8300000, guid: 756d8af8bc54c20488868ec4a4bde72a, type: 3}
@@ -117,6 +118,8 @@ MonoBehaviour:
   knockbackRation: 1
   attackRangle: 1
   pursueRange: 3
+  pursueAbandonRange: 6
+  destroyDelay: 2
 --- !u!1 &814689394855061769
 GameObject:
   m_ObjectHideFlags: 0

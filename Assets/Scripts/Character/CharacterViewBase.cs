@@ -34,6 +34,11 @@ public class CharacterViewBase : MonoBehaviour
         transform.localScale = right ? rightDirScale : lertDirScale;
     }
 
+    public bool IsRight()
+    {
+        return transform.lossyScale == rightDirScale;
+    }
+
     #region 动画事件
     private Action onFootStep;
     private Action onSkillStop;

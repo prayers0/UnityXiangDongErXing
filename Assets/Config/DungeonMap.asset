@@ -55,10 +55,12 @@ MonoBehaviour:
     - {fileID: 6632826223260428963, guid: 12591587cccee6543816f8ab22e5547c, type: 3}
     - {fileID: 6262696616004820329, guid: 3be382b11a986a047b776bdc55c5ecc1, type: 3}
   mapSpawnEnemyConfig:
-    spawnProbability: 0
-    spawnCountRange: {x: 0, y: 3}
+    spawnProbability: 0.526
+    spawnCountRange: {x: 0, y: 5}
     minSegmentSize: 5
-    prefabs: []
+    prefabs:
+    - {fileID: 6625701478938376880, guid: 4aa3f3bd4f9609940a14e0d48ead7470, type: 3}
+    - {fileID: 5206815469869332357, guid: 8544c021891ad2e4485aabc55b48b687, type: 3}
   mapDoorConfig:
     chunkStep: 1
     layer: MapDecoration3

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //默认在巡逻，在同一层左右移动
@@ -11,6 +10,8 @@ public class EnemyController : CharacterControllerBase<EnemyView>
     [SerializeField] private float knockbackRation;
     [SerializeField] private float attackRangle;
     [SerializeField] private float pursueRange;
+    [SerializeField] private float pursueAbandonRange;
+    [SerializeField] private float destroyDelay;//延迟销毁时间，用来表现死亡动画
     private Coroutine doKnockbackCoroutine;
     private bool pursueState;
     private bool patrolDirIsRight;
@@ -46,9 +47,18 @@ public class EnemyController : CharacterControllerBase<EnemyView>
 
     private void LateUpdate()
     {
+        if (CurrentHP <= 0) return;
         UpdateMapChunk();
         if (!MapController.current.hasPlayer) return;
-        if (SkillState()) return;
+        if (SkillState())
+        {
+            if (currentSkill.canMove)
+            {
+                float movDir = view.IsRight() ? 1:-1;
+                Move(movDir * currentSkill.moveSpeedMultiply, false, false);
+            }
+            return;
+        }
         float currentPosX = transform.position.x;
         float playerPosX = MapController.current.playerControllerPoxX;
 
@@ -72,10 +82,23 @@ public class EnemyController : CharacterControllerBase<EnemyView>
         else
         {
             //距离够近去攻击
-            if (distance < attackRangle)
+            for(int i = 0; i < skillDatas.Length; i++)
             {
-                StopMove();
-                ReleaseSkill(UnityEngine.Random.Range(0, skillDatas.Length));
+                SkillData skillData = skillDatas[i];
+                if (distance >= skillData.attackRange.x && distance < skillData.attackRange.y)//处于技能的范内
+                {
+                    StopMove();
+                    view.SetDir(playerPosX > currentPosX);
+                    ReleaseSkill(i);
+                    return;
+                }
+               
+            }
+           
+            //距离太远则切回巡逻
+            if (distance > pursueAbandonRange)
+            {
+                pursueState = false;
                 return;
             }
 
@@ -132,6 +155,20 @@ public class EnemyController : CharacterControllerBase<EnemyView>
     }
 
     protected override void Die()
+    {
+        StopAllCoroutines();
+        Invoke(nameof(DoDie), destroyDelay);
+        view.PlayerAnimation("Die");
+        //关闭碰撞体，刚体
+        rigidbody.gravityScale = 0;
+        Collider2D[] colliders = gameObject.GetComponentsInChildren<Collider2D>();
+        foreach(Collider2D item in colliders)
+        {
+            item.enabled = false;
+        }
+    }
+
+    private void DoDie()
     {
         MapController.current.EnemyManager.RemoveEnemy(this, currentMapChunkCoord);
     }

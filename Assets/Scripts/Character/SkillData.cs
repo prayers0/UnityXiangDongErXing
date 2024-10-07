@@ -5,16 +5,20 @@ using UnityEngine;
 [Serializable]
 public class SkillData
 {
+    [Header("¹²Ïí")]
     public string animationName;
     public float attackValue;
-    public bool releaseOnJump;
     public bool canMove;
-    public bool fanFilp;
     public float moveSpeedMultiply;
-    public float moveSpeedMultiplyOnJump;
     public AudioClip releaseAudio;
     public AudioClip hitClip;
+    [Header("Íæ¼Ò")]
+    public bool releaseOnJump;
+    public bool fanFilp;
+    public float moveSpeedMultiplyOnJump;
     public HitData hitData;
+    [Header("µÐÈË")]
+    public Vector2 attackRange;
 
     [Serializable]
     public class HitData

@@ -285,16 +285,17 @@ MonoBehaviour:
   skillDatas:
   - animationName: Attack1
     attackValue: 10
-    releaseOnJump: 1
     canMove: 1
-    fanFilp: 1
     moveSpeedMultiply: 0.2
+    releaseAudio: {fileID: 8300000, guid: 73552316b142dd147bcd1884fa6cd2f2, type: 3}
+    hitClip: {fileID: 8300000, guid: 8d26b21614ef1d343bac928da5f1123d, type: 3}
+    releaseOnJump: 1
+    fanFilp: 1
     moveSpeedMultiplyOnJump: 1
-    releaseAudio: {fileID: 0}
-    hitClip: {fileID: 0}
     hitData:
       knockbackSpeed: 0
       knockbackTime: 0
+    attackRange: {x: 0, y: 1}
   footStepClips:
   - {fileID: 8300000, guid: 8e0d0bab53858584982f74ae8aca8616, type: 3}
   - {fileID: 8300000, guid: 75dc068412e381649a373b9956c186aa, type: 3}
@@ -310,3 +311,5 @@ MonoBehaviour:
   knockbackRation: 1
   attackRangle: 1
   pursueRange: 3
+  pursueAbandonRange: 5
+  destroyDelay: 2
