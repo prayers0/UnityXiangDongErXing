@@ -28,7 +28,14 @@ public class GameSceneManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            UIManager.Instance.ShowWindow<UI_GameScenePopUpWindow>();
+            UIManager.Instance.ToggleWindow<UI_GameScenePopUpWindow>(out _);
+        }
+        else if (Input.GetKeyDown(KeyCode.I))
+        {
+            if(UIManager.Instance.ToggleWindow<UI_BagWindow>(out UI_BagWindow bagWindow))
+            {
+                bagWindow.Show(gameData.bagData);
+            }
         }
     }
 

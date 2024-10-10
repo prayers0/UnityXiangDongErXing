@@ -17,6 +17,7 @@ public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlotBase where C:ItemCon
         this.itemConfig = itemConfig;
         this.itemData = itemDate;
         Init();
+        iconImage.sprite = itemConfig.icon;
     }
 
     public void Init(ItemConfigBase itemConfig, ItemDataBase itemData)

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : CharacterControllerBase<PlayerView>
 {
@@ -39,7 +40,9 @@ public class PlayerController : CharacterControllerBase<PlayerView>
             if(CanMove()) Move(h);
             else StopMove();
             //技能释放
-            if (Input.GetMouseButton(0) && CanReleaseSkill(currentSkillIndex))
+            //是否在UI游戏物体上方
+            if (Input.GetMouseButton(0)&&!EventSystem.current.IsPointerOverGameObject()
+                && CanReleaseSkill(currentSkillIndex))
             {
                 ReleaseSkill(currentSkillIndex);
                 currentSkillIndex += 1;

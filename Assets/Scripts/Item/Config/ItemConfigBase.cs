@@ -10,4 +10,5 @@ public class ItemConfigBase : ScriptableObject
     public Sprite icon;
     [Multiline]
     public string description;
+    public GameObject slotPrefab;
 }

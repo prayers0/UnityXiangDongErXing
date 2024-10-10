@@ -1,8 +1,5 @@
 
 using System;
-using System.Numerics;
-using Unity.VisualScripting;
-using Vector3 = System.Numerics.Vector3;
 
 [Serializable]
 public class GameData
@@ -12,6 +9,7 @@ public class GameData
     public int mapSeed;
     public int dungeonCoord;
     public bool onMainMap;
+    public BagData bagData;
 }
 
 [Serializable]
@@ -37,4 +35,14 @@ public struct SVector3//可以序列化的向量
     {
         return new UnityEngine.Vector3(x, y, z);
     }
+}
+
+[Serializable]
+public class BagData
+{
+    //格子的固定数量
+    public const int itemCount = 25;
+    //空格子的表现，items[index]==null
+    public ItemDataBase[] items=new ItemDataBase[itemCount];
+
 }

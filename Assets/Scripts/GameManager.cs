@@ -23,11 +23,18 @@ public class GameManager : MonoBehaviour
         
         UIManager.Instance.CloseAllWindow();
         //¹¹½¨Ä¬ÈÏ´æµµ
+        BagData bagData=new BagData();
+        bagData.items[0] = new WeaponData { id = "Weapon1" };
+        bagData.items[2] = new WeaponData { id = "Weapon2" };
+        bagData.items[3] = new ConsumableData { id = "Consunable1", count=1 };
+        bagData.items[4] = new ConsumableData { id = "Consunable2", count=10 };
+        bagData.items[5] = new ConsumableData { id = "Consunable3", count=99 };
         gameData = new GameData
         {
             //playerMainPos = new SVector3(10, 5.5f, 0),
             mapSeed = Random.Range(int.MinValue, int.MaxValue),
-            onMainMap = true
+            onMainMap = true,
+            bagData = bagData,
         };
         SaveGameData();
         SceneManager.LoadScene("Game");

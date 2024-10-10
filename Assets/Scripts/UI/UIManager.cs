@@ -10,13 +10,13 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)//场景已经有一个Manager
-        {
-            Destroy(gameObject);
-            return;
-        }
+        //if (Instance != null)//场景已经有一个Manager
+        //{
+        //    Destroy(gameObject);
+        //    return;
+        //}
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     public T ShowWindow<T>() where T : UI_WindowBase
@@ -42,6 +42,33 @@ public class UIManager : MonoBehaviour
             window.OnClose();
             Destroy(window.gameObject);
         }
+    }
+
+    //窗口如果是关闭的则打开
+    //若以及开启则关闭
+    //bool 返回值，代表的时最终开启状态
+    //out window，如果最终为开启状态则为窗口的引用，否则为null
+    public bool ToggleWindow<T>(out T window) where T : UI_WindowBase
+    {
+        string windowName = typeof(T).Name;
+        window = null;
+        //找到在关闭
+        if (windowCache.Remove(windowName, out UI_WindowBase tempWindow))
+        {
+            tempWindow.OnClose();
+            Destroy(tempWindow.gameObject);
+            return false;
+        }
+        //没找到则开启
+        else
+        {
+            GameObject prefab = GetUIPrefab(windowName);
+            window = GameObject.Instantiate(prefab, transform).GetComponent<T>();
+            window.OnShow();
+            windowCache.Add(windowName, window);
+            return true;
+        }
+
     }
 
     public void CloseAllWindow()

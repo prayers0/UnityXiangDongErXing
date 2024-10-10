@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac5cad774588ad48a3aaebbfb5a943a, type: 3}
   m_Name: Weapon2
   m_EditorClassIdentifier: 
-  itemName: "\u5C60\u9F99\u5200"
+  itemName: Weapon2
   icon: {fileID: 21300000, guid: 5427a82e6c71cea429089cf09f90a676, type: 3}
   description: "\u66F4\u5389\u5BB3\u7684\u4E00\u628A\u5200"
+  slotPrefab: {fileID: 6060876645306740905, guid: 26537cfca7d6a9742b25efd4d938cf13, type: 3}
   attackValue: 150

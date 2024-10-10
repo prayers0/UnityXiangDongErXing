@@ -325,5 +325,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seletedImage: {fileID: 8403752494657596817}
-  iconImage: {fileID: 8403752494657596817}
+  iconImage: {fileID: 8403752494219814345}
   countText: {fileID: 4606072769986371740}
