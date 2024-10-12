@@ -5,6 +5,8 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
+    public Transform normalLayer;
+    public Transform dragLayer;
     public List<GameObject> windowPrefabfabList;//约定窗口预制体的名称与其管理脚本的名称完全一致
     private Dictionary<string,UI_WindowBase> windowCache=new Dictionary<string, UI_WindowBase>();
 
@@ -26,7 +28,7 @@ public class UIManager : MonoBehaviour
         if(!windowCache.TryGetValue(windowName,out UI_WindowBase window))
         {
             GameObject prefab=GetUIPrefab(windowName);
-            window = GameObject.Instantiate(prefab, transform).GetComponent<T>();
+            window = GameObject.Instantiate(prefab, normalLayer).GetComponent<T>();
             window.OnShow();
             windowCache.Add(windowName, window);
         }
@@ -63,7 +65,7 @@ public class UIManager : MonoBehaviour
         else
         {
             GameObject prefab = GetUIPrefab(windowName);
-            window = GameObject.Instantiate(prefab, transform).GetComponent<T>();
+            window = GameObject.Instantiate(prefab, normalLayer).GetComponent<T>();
             window.OnShow();
             windowCache.Add(windowName, window);
             return true;

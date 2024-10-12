@@ -4,9 +4,9 @@ public class WeaponSlot : ItemSlotBase<WeaponConfig,WeaponData>
 {
     public Image usedStateImage;
 
-    public override void Init(WeaponConfig itemConfig, WeaponData itemDate)
+    public override void Init(int index, WeaponConfig itemConfig, WeaponData itemDate)
     {
-        base.Init(itemConfig, itemDate);
+        base.Init(index, itemConfig, itemDate);
         SetUseState(false);
     }
 

@@ -45,4 +45,10 @@ public class BagData
     //空格子的表现，items[index]==null
     public ItemDataBase[] items=new ItemDataBase[itemCount];
 
+    public void Swap(int aIndex, int bIndex)
+    {
+        ItemDataBase temp = items[aIndex];
+        items[aIndex] = items[bIndex]; 
+        items[bIndex] = temp;
+    }
 }

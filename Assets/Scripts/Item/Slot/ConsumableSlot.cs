@@ -7,11 +7,12 @@ public class ConsumableSlot : ItemSlotBase<ConsunableConfig, ConsumableData>
 {
     public Text countText;
 
-    public override void Init(ConsunableConfig itemConfig, ConsumableData itemDate)
+    public override void Init(int index, ConsunableConfig itemConfig, ConsumableData itemDate)
     {
-        base.Init(itemConfig, itemDate);
+        base.Init(index, itemConfig, itemDate);
         SetCount(itemData.count);
     }
+
     public void SetCount(int count)
     {
         countText.text=count.ToString();
