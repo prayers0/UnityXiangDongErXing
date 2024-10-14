@@ -8,6 +8,7 @@ public class UI_BagWindow : UI_WindowBase
     public Transform itemRoot;
     public GameObject emptySlotPrefab;
     private BagData bagData;
+    private SlotBase[] slots = new SlotBase[BagData.itemCount];
 
     public override void OnShow()
     {
@@ -35,20 +36,58 @@ public class UI_BagWindow : UI_WindowBase
                 CreateItemSlot(i,itemConfig,itemData);
             }
         }
+        WeaponSlot weaponSlot = (WeaponSlot)slots[bagData.usedWeaponIndex];
+        weaponSlot.SetUseState(true);
     }
 
     private EmptySlot CreateEmptySlot(int index)
     {
         EmptySlot slot=GameObject.Instantiate(emptySlotPrefab,itemRoot).GetComponent<EmptySlot>();
         slot.Init(index);
+        slots[index]=slot;
+        slot.transform.SetSiblingIndex(index);
         return slot;
     }
 
     private IItemSlotBase CreateItemSlot(int index,ItemConfigBase itemConfig,ItemDataBase itemData)
     {
-        IItemSlotBase slot = GameObject.Instantiate(itemConfig.slotPrefab, itemRoot).GetComponent<IItemSlotBase>();
-        slot.Init(index,itemConfig, itemData,OnItemSwap);
+        GameObject go = GameObject.Instantiate(itemConfig.slotPrefab, itemRoot);
+        IItemSlotBase slot = go.GetComponent<IItemSlotBase>();
+        slot.Init(index,itemConfig, itemData,OnItemSwap,OnUseItem);
+        slots[index] =(SlotBase) slot;
+        go.transform.SetSiblingIndex(index);
         return slot;
+    }
+
+    private void OnUseItem(int index, ItemConfigBase itemConfig, ItemDataBase itemData)
+    {
+        if (PlayerController.Instance == null) return;
+        PlayerController.Instance.OnUssItem(itemConfig, itemData);
+
+        if(itemConfig is WeaponConfig)//切换武器
+        {
+            if (bagData.usedWeaponIndex != -1)
+            {
+                ((WeaponSlot)slots[bagData.usedWeaponIndex]).SetUseState(false);
+            }
+            bagData.usedWeaponIndex = index;
+            ((WeaponSlot)slots[bagData.usedWeaponIndex]).SetUseState(true);
+        }
+        else if(itemConfig is ConsunableConfig)//使用消耗品
+        {
+            ConsumableData consumableData = (ConsumableData)itemData;
+            consumableData.count -= 1;
+            if (consumableData.count == 0)
+            {
+                bagData.items[index] = null;
+                GameObject.Destroy(slots[index].gameObject);
+                CreateEmptySlot(index);
+            }
+            else
+            {
+                ((ConsumableSlot)slots[index]).SetCount(consumableData.count);
+            }
+        }
     }
 
     private void OnItemSwap(SlotBase slotA, SlotBase slotB)
@@ -60,6 +99,9 @@ public class UI_BagWindow : UI_WindowBase
         slotB.transform.SetSiblingIndex(aIndex);
         slotB.SetIndex(aIndex);
         bagData.Swap(aIndex, bIndex);
+
+        slots[aIndex] = slotB;
+        slots[bIndex] = slotA;
     }
 
 }

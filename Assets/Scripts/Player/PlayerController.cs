@@ -76,4 +76,8 @@ public class PlayerController : CharacterControllerBase<PlayerView>
             GameSceneManager.Instance.LoadMainMap();
         }
     }
+
+    public void OnUssItem(ItemConfigBase itemConfig, ItemDataBase itemData)
+    {
+    }
 }

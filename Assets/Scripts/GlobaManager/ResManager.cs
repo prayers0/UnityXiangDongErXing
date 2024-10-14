@@ -1,18 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResManager : MonoBehaviour
+public class ResManager : GlobaManagerBase<ResManager>
 {
-    public static ResManager Instance { get; private set; }
     public List<ItemConfigBase> itemConfigList=new List<ItemConfigBase>();
 
     private Dictionary<string, ItemConfigBase> itemConfigDic=new Dictionary<string, ItemConfigBase>();
 
-    private void Awake()
+ 
+    public override void Init()
     {
-        Instance = this;
+        base.Init();
         InItItemConfig();
-
     }
 
     private void InItItemConfig()

@@ -1,15 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : GlobaManagerBase<AudioManager>
 {
     [SerializeField] private AudioSource audioSource;
-    public static AudioManager Instance;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     public void PlayerAudio(AudioClip audioClip,float volum = 1)
     {

@@ -1,5 +1,6 @@
 
 using System;
+using UnityEditor.Experimental.GraphView;
 
 [Serializable]
 public class GameData
@@ -44,11 +45,16 @@ public class BagData
     public const int itemCount = 25;
     //空格子的表现，items[index]==null
     public ItemDataBase[] items=new ItemDataBase[itemCount];
+    //已经使用的武器索引
+    public int usedWeaponIndex;
 
     public void Swap(int aIndex, int bIndex)
     {
         ItemDataBase temp = items[aIndex];
         items[aIndex] = items[bIndex]; 
         items[bIndex] = temp;
-    }
+
+        if(aIndex==usedWeaponIndex) usedWeaponIndex = bIndex;
+        else if(bIndex==usedWeaponIndex) usedWeaponIndex = aIndex;
+    } 
 }

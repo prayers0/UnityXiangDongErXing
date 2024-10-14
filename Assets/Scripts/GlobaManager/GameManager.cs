@@ -16,6 +16,11 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        IGlobalManager[] managers = GetComponentsInChildren<IGlobalManager>();
+        foreach(IGlobalManager manager in managers)
+        {
+            manager.Init();
+        }
     }
 
     public void NewGame()
@@ -29,6 +34,7 @@ public class GameManager : MonoBehaviour
         bagData.items[3] = new ConsumableData { id = "Consunable1", count=1 };
         bagData.items[4] = new ConsumableData { id = "Consunable2", count=10 };
         bagData.items[5] = new ConsumableData { id = "Consunable3", count=99 };
+        bagData.usedWeaponIndex = 0;
         gameData = new GameData
         {
             //playerMainPos = new SVector3(10, 5.5f, 0),

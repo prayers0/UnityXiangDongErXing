@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : GlobaManagerBase<UIManager>
 {
-    public static UIManager Instance { get; private set; }
     public Transform normalLayer;
     public Transform dragLayer;
     public List<GameObject> windowPrefabfabList;//约定窗口预制体的名称与其管理脚本的名称完全一致
@@ -17,7 +16,6 @@ public class UIManager : MonoBehaviour
         //    Destroy(gameObject);
         //    return;
         //}
-        Instance = this;
         //DontDestroyOnLoad(gameObject);
     }
 

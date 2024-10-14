@@ -5,16 +5,19 @@ using System;
 
 public interface IItemSlotBase
 {
-    public void Init(int index, ItemConfigBase itemConfig, ItemDataBase itemData, Action<SlotBase, SlotBase> onSwapAction);
+    public void Init(int index, ItemConfigBase itemConfig, ItemDataBase itemData,
+        Action<SlotBase, SlotBase> onSwapAction, Action<int, ItemConfigBase, ItemDataBase> onRightButtonUseAction);
 }
 
-public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlotBase,IBeginDragHandler,IDragHandler,IEndDragHandler
+public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlotBase,IBeginDragHandler,
+    IDragHandler,IEndDragHandler,IPointerClickHandler
     where C:ItemConfigBase where D:ItemDataBase
 {
     public Image iconImage;
     protected C itemConfig;
     protected D itemData;
     protected Action<SlotBase, SlotBase> onSwapAction;
+    protected Action<int, ItemConfigBase, ItemDataBase> onRightButtonUseAction;
 
     public virtual void Init(int index,C itemConfig,D itemDate)
     {
@@ -24,8 +27,10 @@ public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlotBase,IBeginDragHandl
         iconImage.sprite = itemConfig.icon;
     }
 
-    public void Init(int index,ItemConfigBase itemConfig, ItemDataBase itemData,Action<SlotBase,SlotBase> onSwapAction)
+    public void Init(int index,ItemConfigBase itemConfig, ItemDataBase itemData,
+        Action<SlotBase,SlotBase> onSwapAction, Action<int, ItemConfigBase, ItemDataBase> onRightButtonUseAction)
     {
+        this.onRightButtonUseAction = onRightButtonUseAction;
         this.onSwapAction=onSwapAction;
         Init(index,(C)itemConfig, (D)itemData);
     }
@@ -54,6 +59,14 @@ public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlotBase,IBeginDragHandl
         {
             onSwapAction?.Invoke(this, enteredSlot);
 
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (onRightButtonUseAction!=null&&eventData.button == PointerEventData.InputButton.Right)
+        {
+            onRightButtonUseAction.Invoke(index, itemConfig, itemData);
         }
     }
 }
