@@ -68,3 +68,8 @@ MonoBehaviour:
     isEntrance: 0
     prefab:
     - {fileID: 7032325535486344649, guid: d1cd41edf86c1b04fa8f2300aadbefbb, type: 3}
+  mapNPCConfig:
+    chunkStep: 0
+    layer: 
+    probaility: 0
+    prefab: []

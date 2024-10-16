@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random=System.Random;
@@ -11,7 +12,7 @@ public class MapChunk
     private MapConfig mapConfig;
     private Tilemap groundTileMap;
     private Transform decorationRoot;
-    private Transform doorRoot;
+    private Transform otherRoot;
     private float cellSize;//格子尺寸
 
     private float cellTopOffset;//地图种子
@@ -19,15 +20,16 @@ public class MapChunk
     private bool active;
     private float destoryTimer;
     private bool haveDoor;
+    private bool haveNPC;
     //生成地图块
-    public void Init(MapConfig mapConfig,Tilemap groupTileMap,Transform doorRoot,Transform decorationRoot,int chunkCoord,
+    public void Init(MapConfig mapConfig,Tilemap groupTileMap,Transform otherRoot,Transform decorationRoot,int chunkCoord,
         int mapSeed,float cellSize,float cellTopOffset)
     {
         this.mapConfig = mapConfig;
         this.groundTileMap = groupTileMap;
         this.decorationRoot = decorationRoot;
         this.chunkCoord = chunkCoord;
-        this.doorRoot = doorRoot;
+        this.otherRoot = otherRoot;
         this.cellSize = cellSize;
         this.cellTopOffset = cellTopOffset;
         int chunkSeed = mapSeed + chunkCoord;
@@ -35,10 +37,15 @@ public class MapChunk
         decorationList = new List<GameObject>();
         //是否包含门
         MapDungeonDoorConfig doorConfig = mapConfig.mapDoorConfig;
-        haveDoor = doorConfig.prefab.Count > 0 && chunkCoord 
-            % doorConfig.chunkStep == 0
+        haveDoor = doorConfig.prefab.Count > 0 
+            && chunkCoord % doorConfig.chunkStep == 0
             && chunkRandom.NextDouble()<doorConfig.probaility;
 
+        MapNPCConfig npcConfig=mapConfig.mapNPCConfig;
+        haveNPC=!haveDoor
+            &&doorConfig.prefab.Count>0
+            && chunkCoord%npcConfig.chunkStep==0
+            &&chunkRandom.NextDouble()< npcConfig.probaility;
 
         CreateChunkSegments(chunkCoord, chunkRandom);
         SetActive(true);
@@ -85,9 +92,14 @@ public class MapChunk
             {
                 CreateEnemys(segmentStartCoord, segmentSize, secondFloor);
             }
-            if (haveDoor && segmentSize == mapConfig.chunkSize - currentCoord)//需要门并且当前是最后一段
+            bool lastSecond=segmentSize==mapConfig.chunkSize-currentCoord;
+            if (haveDoor && lastSecond)//需要门并且当前是最后一段
             {
                 CreateDoor(segmentStartCoord, segmentSize, secondFloor, random);
+            }
+            else if(haveNPC && lastSecond)
+            {
+                CreateNpc(segmentStartCoord, segmentSize, secondFloor, random);
             }
             else
             {
@@ -98,6 +110,25 @@ public class MapChunk
             currentCoord += segmentSize;
         }
     }
+    private GameObject npc;
+    private void CreateNpc(int startCoord, int size, bool secondFloor, Random random)
+    {
+        int coordY = secondFloor ? 1 : 0;
+        MapNPCConfig npcConfig = mapConfig.mapNPCConfig;
+        GameObject prefab = npcConfig.prefab[random.Next(npcConfig.prefab.Count)];
+        npc = GameObject.Instantiate(prefab, otherRoot);
+        Vector3Int cellCoord = new Vector3Int(startCoord + (size / 2), coordY);
+        Vector3 position = groundTileMap.GetCellCenterLocal(cellCoord);
+        //Y轴偏移到盒子的顶部
+        position.y += cellTopOffset;
+        npc.transform.position = position;
+        //修改的精灵渲染器的层设置（物体可能是嵌套的也就是有多个精灵渲染器）
+        foreach (SpriteRenderer spriteRenderer in npc.GetComponentsInChildren<SpriteRenderer>())
+        {
+            spriteRenderer.sortingLayerName = npcConfig.layer;
+        }
+        //商人的初始化
+    }
 
     private GameObject door;
     private void CreateDoor(int startCoord, int size, bool secondFloor,Random random)
@@ -105,7 +136,7 @@ public class MapChunk
         int coordY = secondFloor ? 1 : 0;
         MapDungeonDoorConfig doorConfig = mapConfig.mapDoorConfig;
         GameObject prefab= doorConfig.prefab[random.Next(doorConfig.prefab.Count)];
-        door = GameObject.Instantiate(prefab,doorRoot);
+        door = GameObject.Instantiate(prefab,otherRoot);
         Vector3Int cellCoord = new Vector3Int(startCoord + (size/2), coordY);
         Vector3 position = groundTileMap.GetCellCenterLocal(cellCoord);
         //Y轴偏移到盒子的顶部

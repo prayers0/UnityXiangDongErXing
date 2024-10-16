@@ -67,14 +67,26 @@ public class PlayerController : CharacterControllerBase<PlayerView>
 
     public void OnDoorStay(int doorCoord, bool isEntrance)
     {
-        if (isEntrance && Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.E))
         {
-            GameSceneManager.Instance.EnterDungeonMap(doorCoord);
+            if (isEntrance)
+            {
+                GameSceneManager.Instance.EnterDungeonMap(doorCoord);
+            }
+            else
+            {
+                GameSceneManager.Instance.LoadMainMap();
+            }
         }
-        else if (!isEntrance && Input.GetKey(KeyCode.W))
-        {
-            GameSceneManager.Instance.LoadMainMap();
-        }
+
+        //if (isEntrance && Input.GetKey(KeyCode.S))
+        //{
+        //    GameSceneManager.Instance.EnterDungeonMap(doorCoord);
+        //}
+        //else if (!isEntrance && Input.GetKey(KeyCode.W))
+        //{
+        //    GameSceneManager.Instance.LoadMainMap();
+        //}
     }
 
     public void OnUssItem(ItemConfigBase itemConfig, ItemDataBase itemData)

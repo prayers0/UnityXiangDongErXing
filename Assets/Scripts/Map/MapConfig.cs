@@ -20,6 +20,7 @@ public class MapConfig : ScriptableObject
     public List<MapDecorationLayerConfig> mapDecorationConfigs = new List<MapDecorationLayerConfig>();
     public MapSpawnEnemyConfig mapSpawnEnemyConfig;
     public MapDungeonDoorConfig mapDoorConfig;
+    public MapNPCConfig mapNPCConfig;
 }
 
 [Serializable]
@@ -51,4 +52,13 @@ public class MapSpawnEnemyConfig
     public Vector2Int spawnCountRange;//生成数量的范围
     public int minSegmentSize = 5;//最小的怪物生成段落尺寸
     public List<GameObject> prefabs;
+}
+
+[Serializable]
+public class MapNPCConfig
+{
+    public int chunkStep;//多少个地图块计算一次
+    public string layer; //生成后的精灵渲染器的层设置
+    [Range(0, 1f)] public float probaility;//生成概率0~1
+    public List<GameObject> prefab;//预制体随机选取一个
 }
