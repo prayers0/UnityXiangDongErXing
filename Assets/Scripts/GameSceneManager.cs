@@ -43,6 +43,14 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
+    public void OpenBagWindow()
+    {
+        if(!UIManager.Instance.TryGetWindow(out UI_BagWindow bagWindow))
+        {
+            UIManager.Instance.ShowWindow<UI_BagWindow>().Show(gameData.bagData);
+        }
+    }
+
     private void BlackCackDrop()
     {
         UIManager.Instance.ShowWindow<UI_BlackCanvasDropWindow>().Fade(2);

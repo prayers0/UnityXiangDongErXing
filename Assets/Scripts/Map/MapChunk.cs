@@ -128,6 +128,7 @@ public class MapChunk
             spriteRenderer.sortingLayerName = npcConfig.layer;
         }
         //商人的初始化
+        npc.GetComponent<NPCBase>().Init(random);
     }
 
     private GameObject door;

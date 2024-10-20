@@ -22,9 +22,21 @@ public class UI_ShopWindow : UI_WindowBase
         UIManager.Instance.CloseWindow<UI_ShopWindow>();
     }
 
-    public void Show()
+    public void Show(List<ItemConfigBase> items)
     {
-        
+        for(int i = 0; i < itemCount; i++)
+        {
+            if (i >= items.Count)
+            {
+                CreateEmptySlot(i);
+            }
+            else
+            {
+                ItemConfigBase itemConifg = items[i];
+                ItemDataBase itemData=itemConifg.GetDefaultData();
+                CreateItemSlot(i, itemConifg, itemData);
+            }
+        }
     }
 
     private EmptySlot CreateEmptySlot(int index)

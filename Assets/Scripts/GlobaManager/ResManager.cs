@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,5 +34,10 @@ public class ResManager : GlobaManagerBase<ResManager>
     public ItemConfigBase GetItemConfig(string name)
     {
         return itemConfigDic[name];
+    }
+
+    public ItemConfigBase GetRandomItemConfig(System.Random mapChunkRandom)
+    {
+        return itemConfigList[mapChunkRandom.Next(0, itemConfigList.Count)];
     }
 }

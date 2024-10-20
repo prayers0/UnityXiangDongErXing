@@ -44,6 +44,14 @@ public class UIManager : GlobaManagerBase<UIManager>
         }
     }
 
+    public bool TryGetWindow<T>(out T window) where T : UI_WindowBase
+    {
+        string windowName = typeof(T).Name;
+        bool result = windowCache.TryGetValue(windowName, out UI_WindowBase tempWindow);
+        window=result?(T)tempWindow:null;
+        return result;
+    }
+
     //窗口如果是关闭的则打开
     //若以及开启则关闭
     //bool 返回值，代表的时最终开启状态

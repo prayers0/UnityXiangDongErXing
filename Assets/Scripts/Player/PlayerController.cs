@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -77,7 +78,7 @@ public class PlayerController : CharacterControllerBase<PlayerView>
 
     public void OnDoorStay(int doorCoord, bool isEntrance)
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (isEntrance)
             {
@@ -88,18 +89,22 @@ public class PlayerController : CharacterControllerBase<PlayerView>
                 GameSceneManager.Instance.LoadMainMap();
             }
         }
-
-        //if (isEntrance && Input.GetKey(KeyCode.S))
-        //{
-        //    GameSceneManager.Instance.EnterDungeonMap(doorCoord);
-        //}
-        //else if (!isEntrance && Input.GetKey(KeyCode.W))
-        //{
-        //    GameSceneManager.Instance.LoadMainMap();
-        //}
     }
 
     public void OnUssItem(ItemConfigBase itemConfig, ItemDataBase itemData)
     {
+    }
+
+    public void OnMerchantStay(List<ItemConfigBase> items)
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            //首先切换一次商店窗口，如果切换后的是开启状态则同步打开背包
+            if(UIManager.Instance.ToggleWindow(out UI_ShopWindow ShopWindow))
+            {
+                ShopWindow.Show(items);
+                GameSceneManager.Instance.OpenBagWindow();
+            }
+        }
     }
 }
