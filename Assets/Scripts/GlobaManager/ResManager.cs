@@ -7,7 +7,11 @@ public class ResManager : GlobaManagerBase<ResManager>
 
     private Dictionary<string, ItemConfigBase> itemConfigDic=new Dictionary<string, ItemConfigBase>();
 
- 
+    #region 配置类型的数据
+    public int PlayerDefaultCoinCount = 100;
+    public float PlayerMaxHp = 100;
+
+    #endregion
     public override void Init()
     {
         base.Init();

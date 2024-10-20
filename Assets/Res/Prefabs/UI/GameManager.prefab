@@ -189,6 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c332a4c8d8bc549847ff77ca3eeadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerDefaultCoinCount: 100
+  PlayerMaxHp: 100
 --- !u!114 &9086983351489489409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +332,7 @@ MonoBehaviour:
   - {fileID: 4882018227754433123, guid: a3417742094622347a74d47c99434af9, type: 3}
   - {fileID: 2142362145410320331, guid: e8b65716b17ae45439ea53d183091828, type: 3}
   - {fileID: 3495787542609761511, guid: 10f7af5604d2da64f8088d43109f9e0b, type: 3}
+  - {fileID: 5269122347901684750, guid: afe67805b554f9d4bb30b4de2f6ed0a1, type: 3}
 --- !u!1 &9086983352668377125
 GameObject:
   m_ObjectHideFlags: 0

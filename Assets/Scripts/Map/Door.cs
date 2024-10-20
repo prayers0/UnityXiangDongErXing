@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public new Animation animation;
+    public new Animation hintAnimation;
     public MapDungeonDoorConfig doorConfig;
 
     public void Init(MapDungeonDoorConfig doorConfig)
@@ -12,13 +12,13 @@ public class Door : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        animation.Play("Door_Hint");
+        hintAnimation.Play("Door_Hint");
         PlayerController.Instance.OnDoorStay(MapController.current.GetCellCoord(transform.position.x)
             ,doorConfig.isEntrance);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        animation.Play("Door_Idle");
+        hintAnimation.Play("Door_Idle");
     }
 }

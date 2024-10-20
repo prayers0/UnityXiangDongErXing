@@ -12,7 +12,6 @@ public abstract class CharacterControllerBase<V> : MonoBehaviour,ICharacterContr
     [SerializeField] protected new Rigidbody2D rigidbody;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float jumpPower;
-    [SerializeField] protected float maxHp;
     [SerializeField] protected Weapon weapon;
     [SerializeField] protected SkillData[] skillDatas;
 
@@ -29,6 +28,7 @@ public abstract class CharacterControllerBase<V> : MonoBehaviour,ICharacterContr
         {
             if (currentHP == value) return;
             currentHP = value;
+            OnHPChanged(currentHP);
             if (currentHP <= 0)
             {
                 currentHP = 0;
@@ -37,11 +37,15 @@ public abstract class CharacterControllerBase<V> : MonoBehaviour,ICharacterContr
         } 
     }
 
+    protected virtual void OnHPChanged(float newHp)
+    {
+
+    }
+
     public virtual void Init()
     {
         view.Init(OnFootStep, OnSkillStop);
         weapon.Init(OnHit);
-        CurrentHP = maxHp;
     }
 
     protected bool JumpState()

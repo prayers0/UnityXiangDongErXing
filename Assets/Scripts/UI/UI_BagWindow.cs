@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_BagWindow : UI_WindowBase
@@ -59,9 +60,9 @@ public class UI_BagWindow : UI_WindowBase
         return slot;
     }
 
-    private void OnUseItem(int index, ItemConfigBase itemConfig, ItemDataBase itemData)
+    private void OnUseItem(int index, ItemConfigBase itemConfig, ItemDataBase itemData, PointerEventData.InputButton inputButton)
     {
-        if (PlayerController.Instance == null) return;
+        if (PlayerController.Instance == null&&inputButton!=PointerEventData.InputButton.Right) return;
         PlayerController.Instance.OnUssItem(itemConfig, itemData);
 
         if(itemConfig is WeaponConfig)//ÇÐ»»ÎäÆ÷

@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get;private set; }
     public GameData gameData { get; private set; }
-
+   
     private void Awake()
     {
         if (Instance != null)
@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
             mapSeed = Random.Range(int.MinValue, int.MaxValue),
             onMainMap = true,
             bagData = bagData,
+            coinCount = ResManager.Instance.PlayerDefaultCoinCount,
+            playerHp = ResManager.Instance.PlayerMaxHp
         };
         SaveGameData();
         SceneManager.LoadScene("Game");

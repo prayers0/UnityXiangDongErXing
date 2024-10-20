@@ -11,6 +11,8 @@ public class GameData
     public int dungeonCoord;
     public bool onMainMap;
     public BagData bagData;
+    public int coinCount;
+    public float playerHp;
 }
 
 [Serializable]

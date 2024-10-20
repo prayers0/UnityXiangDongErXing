@@ -7,6 +7,8 @@ using UnityEngine;
 //追击过程中，如果玩家足够近则攻击玩家
 public class EnemyController : CharacterControllerBase<EnemyView>
 {
+    [SerializeField] protected float maxHp;
+
     [SerializeField] private float knockbackRation;
     [SerializeField] private float attackRangle;
     [SerializeField] private float pursueRange;
@@ -24,6 +26,7 @@ public class EnemyController : CharacterControllerBase<EnemyView>
     public override void Init()
     {
         base.Init();
+        currentHP = maxHp;
         pursueState = false;
         patrolDirIsRight = UnityEngine.Random.Range(0, 2) == 0;
 

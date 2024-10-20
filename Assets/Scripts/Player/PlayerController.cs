@@ -11,6 +11,16 @@ public class PlayerController : CharacterControllerBase<PlayerView>
     {
         Instance = this;
     }
+
+    public void InitHP(float hp)
+    {
+        this.currentHP = hp;
+    }
+
+    protected override void OnHPChanged(float newHp)
+    {
+        GameSceneManager.Instance.SetHp(newHp);
+    }
     public override void Init()
     {
         base.Init();

@@ -6,7 +6,8 @@ using System;
 public interface IItemSlotBase
 {
     public void Init(int index, ItemConfigBase itemConfig, ItemDataBase itemData,
-        Action<SlotBase, SlotBase> onSwapAction, Action<int, ItemConfigBase, ItemDataBase> onRightButtonUseAction);
+        Action<SlotBase, SlotBase> onSwapAction, Action<int, ItemConfigBase, ItemDataBase,
+            PointerEventData.InputButton> onRightButtonUseAction);
 }
 
 public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlotBase,IBeginDragHandler,
@@ -17,7 +18,7 @@ public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlotBase,IBeginDragHandl
     protected C itemConfig;
     protected D itemData;
     protected Action<SlotBase, SlotBase> onSwapAction;
-    protected Action<int, ItemConfigBase, ItemDataBase> onRightButtonUseAction;
+    protected Action<int, ItemConfigBase, ItemDataBase, PointerEventData.InputButton> onUseAction;
 
     public virtual void Init(int index,C itemConfig,D itemDate)
     {
@@ -28,9 +29,10 @@ public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlotBase,IBeginDragHandl
     }
 
     public void Init(int index,ItemConfigBase itemConfig, ItemDataBase itemData,
-        Action<SlotBase,SlotBase> onSwapAction, Action<int, ItemConfigBase, ItemDataBase> onRightButtonUseAction)
+        Action<SlotBase,SlotBase> onSwapAction, Action<int, ItemConfigBase, ItemDataBase
+            , PointerEventData.InputButton> onRightButtonUseAction)
     {
-        this.onRightButtonUseAction = onRightButtonUseAction;
+        this.onUseAction = onRightButtonUseAction;
         this.onSwapAction=onSwapAction;
         Init(index,(C)itemConfig, (D)itemData);
     }
@@ -64,9 +66,9 @@ public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlotBase,IBeginDragHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (onRightButtonUseAction!=null&&eventData.button == PointerEventData.InputButton.Right)
+        if (onUseAction!=null&&eventData.button == PointerEventData.InputButton.Right)
         {
-            onRightButtonUseAction.Invoke(index, itemConfig, itemData);
+            onUseAction.Invoke(index, itemConfig, itemData,eventData.button);
         }
     }
 }

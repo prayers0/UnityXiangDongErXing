@@ -8,14 +8,18 @@ public class GameSceneManager : MonoBehaviour
     public GameObject mainMapPrefab;
     public GameObject dungeonMapPrefab;
     private GameData gameData => GameManager.Instance.gameData;
+    private UI_GameMainWindow mainWindow;
     private void Awake()
     {
         Instance = this;
     }
     private void  Start()
     {
+        mainWindow=UIManager.Instance.ShowWindow<UI_GameMainWindow>();
+        mainWindow.SetCoin(gameData.coinCount);
+        mainWindow.SetHp(gameData.playerHp / ResManager.Instance.PlayerMaxHp);
         PlayerController.Instance.Init();
-
+        PlayerController.Instance.InitHP(gameData.playerHp);
         if (gameData.onMainMap) LoadMainMap();
         else LoadDungeonMap();
         //ºÚÄ»ÕÚµ²
@@ -125,5 +129,17 @@ public class GameSceneManager : MonoBehaviour
         {
             gameData.playerDungeonMapPos = new SVector3(position);
         }
+    }
+
+    public void SetCoin(int count)
+    {
+        gameData.coinCount = count;
+        mainWindow.SetCoin(gameData.coinCount);
+    }
+
+    public void SetHp(float hp)
+    {
+        gameData.playerHp = hp;
+        mainWindow.SetHp(gameData.playerHp/ResManager.Instance.PlayerMaxHp);
     }
 }
