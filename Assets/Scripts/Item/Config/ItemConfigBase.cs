@@ -9,6 +9,7 @@ public abstract class ItemConfigBase : ScriptableObject
 {
     public string itemName;
     public Sprite icon;
+    public int price;
     [Multiline]
     public string description;
     public GameObject slotPrefab;
