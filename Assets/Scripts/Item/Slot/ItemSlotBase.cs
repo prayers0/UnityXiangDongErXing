@@ -71,4 +71,27 @@ public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlotBase,IBeginDragHandl
             onUseAction.Invoke(index, itemConfig, itemData,eventData.button);
         }
     }
+
+    public override void OnPointerEnter(PointerEventData eventData)
+    {
+        base.OnPointerEnter(eventData);
+        RectTransform rectTransform = (RectTransform)transform;
+        UIManager.Instance.ShowWindow<UI_IteminfoPopupWindow>().Show(transform.position+
+            new Vector3(0,rectTransform.sizeDelta.y),itemConfig);
+    }
+
+    public override void OnPointerExit(PointerEventData eventData)
+    {
+        base.OnPointerExit(eventData);
+        UIManager.Instance.CloseWindow<UI_IteminfoPopupWindow>();
+    }
+
+    //如果鼠标正在格子中并没有离开，但是格子销毁了并不会调用onpointerExit
+    private void OnDestroy()
+    {
+        if (enteredSlot == this)
+        {
+            UIManager.Instance.CloseWindow<UI_IteminfoPopupWindow>();
+        }
+    }
 }

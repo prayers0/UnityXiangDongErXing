@@ -19,13 +19,13 @@ public abstract class SlotBase : MonoBehaviour,IPointerEnterHandler,IPointerExit
         this.index = index;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         seletedImage.gameObject.SetActive(true);
         enteredSlot = this;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
         seletedImage.gameObject.SetActive(false);
         enteredSlot = null;
