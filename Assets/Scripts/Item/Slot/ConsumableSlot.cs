@@ -6,10 +6,9 @@ using UnityEngine.UI;
 public class ConsumableSlot : ItemSlotBase<ConsunableConfig, ConsumableData>
 {
     public Text countText;
-
-    public override void Init(int index, ConsunableConfig itemConfig, ConsumableData itemDate)
+    public override void Init(UI_WindowBase ownerWindow, int index, ConsunableConfig itemConfig, ConsumableData itemDate)
     {
-        base.Init(index, itemConfig, itemDate);
+        base.Init(ownerWindow, index, itemConfig, itemDate);
         SetCount(itemData.count);
     }
 

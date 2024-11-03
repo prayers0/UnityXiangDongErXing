@@ -42,24 +42,29 @@ public class UI_ShopWindow : UI_WindowBase
     private EmptySlot CreateEmptySlot(int index)
     {
         EmptySlot slot = GameObject.Instantiate(emptySlotPrefab, itemRoot).GetComponent<EmptySlot>();
-        slot.Init(index);
+        slot.Init(this,index);
         slots[index] = slot;
         slot.transform.SetSiblingIndex(index);
         return slot;
     }
 
-    private IItemSlotBase CreateItemSlot(int index, ItemConfigBase itemConfig, ItemDataBase itemData)
+    private IItemSlot CreateItemSlot(int index, ItemConfigBase itemConfig, ItemDataBase itemData)
     {
         GameObject go = GameObject.Instantiate(itemConfig.slotPrefab, itemRoot);
-        IItemSlotBase slot = go.GetComponent<IItemSlotBase>();
-        slot.Init(index, itemConfig, itemData, null, OnUseItem);
+        IItemSlot slot = go.GetComponent<IItemSlot>();
+        slot.Init(this,index, itemConfig, itemData, OnSlotDrag, null);
         slots[index] = (SlotBase)slot;
         go.transform.SetSiblingIndex(index);
         return slot;
     }
 
-    private void OnUseItem(int index, ItemConfigBase itemConfig, ItemDataBase itemData, PointerEventData.InputButton inputButton)
+    private void OnSlotDrag(SlotBase slotA,SlotBase slotB)
     {
-        if (PlayerController.Instance == null&&inputButton!=PointerEventData.InputButton.Left) return;
+        //购物物品：格子A本身是物品&&格子B是背包格子&&格子B是空格子
+        if (slotA is IItemSlot&&slotB.ownerWindow is UI_BagWindow)
+        {
+            IItemSlot itemSlot = (IItemSlot)slotA;
+
+        }
     }
 }

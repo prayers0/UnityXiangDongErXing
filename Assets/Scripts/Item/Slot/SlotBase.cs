@@ -7,9 +7,11 @@ public abstract class SlotBase : MonoBehaviour,IPointerEnterHandler,IPointerExit
     public Image seletedImage;
     public int index;
     protected static SlotBase enteredSlot;
+    public UI_WindowBase ownerWindow { get; private set; }//我所才的窗口
 
-    public virtual void Init(int index)
+    public virtual void Init(UI_WindowBase ownerWindow,int index)
     {
+        this.ownerWindow = ownerWindow;
         SetIndex(index);
         OnPointerExit(null);
     }

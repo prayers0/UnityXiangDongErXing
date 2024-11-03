@@ -44,17 +44,17 @@ public class UI_BagWindow : UI_WindowBase
     private EmptySlot CreateEmptySlot(int index)
     {
         EmptySlot slot=GameObject.Instantiate(emptySlotPrefab,itemRoot).GetComponent<EmptySlot>();
-        slot.Init(index);
+        slot.Init(this,index);
         slots[index]=slot;
         slot.transform.SetSiblingIndex(index);
         return slot;
     }
 
-    private IItemSlotBase CreateItemSlot(int index,ItemConfigBase itemConfig,ItemDataBase itemData)
+    private IItemSlot CreateItemSlot(int index,ItemConfigBase itemConfig,ItemDataBase itemData)
     {
         GameObject go = GameObject.Instantiate(itemConfig.slotPrefab, itemRoot);
-        IItemSlotBase slot = go.GetComponent<IItemSlotBase>();
-        slot.Init(index,itemConfig, itemData,OnItemSwap,OnUseItem);
+        IItemSlot slot = go.GetComponent<IItemSlot>();
+        slot.Init(this,index,itemConfig, itemData,OnSlotDrag,OnUseItem);
         slots[index] =(SlotBase) slot;
         go.transform.SetSiblingIndex(index);
         return slot;
@@ -91,18 +91,28 @@ public class UI_BagWindow : UI_WindowBase
         }
     }
 
-    private void OnItemSwap(SlotBase slotA, SlotBase slotB)
+    //格子A来自内部单格子b不一定
+    private void OnSlotDrag(SlotBase slotA, SlotBase slotB)
     {
-        int aIndex = slotA.index;
-        int bIndex = slotB.index;
-        slotA.transform.SetSiblingIndex(bIndex);
-        slotA.SetIndex(bIndex);
-        slotB.transform.SetSiblingIndex(aIndex);
-        slotB.SetIndex(aIndex);
-        bagData.Swap(aIndex, bIndex);
+        //背包内部的拖拽行为
+        if (slotB.ownerWindow==this)
+        {
+            int aIndex = slotA.index;
+            int bIndex = slotB.index;
+            slotA.transform.SetSiblingIndex(bIndex);
+            slotA.SetIndex(bIndex);
+            slotB.transform.SetSiblingIndex(aIndex);
+            slotB.SetIndex(aIndex);
+            bagData.Swap(aIndex, bIndex);
 
-        slots[aIndex] = slotB;
-        slots[bIndex] = slotA;
+            slots[aIndex] = slotB;
+            slots[bIndex] = slotA;
+        }
+        //TODO:出售物品
+        else if(slotB.ownerWindow is UI_ShopWindow)
+        {
+
+        }
     }
 
 }

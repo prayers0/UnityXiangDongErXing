@@ -3,38 +3,38 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 
-public interface IItemSlotBase
+public interface IItemSlot
 {
-    public void Init(int index, ItemConfigBase itemConfig, ItemDataBase itemData,
-        Action<SlotBase, SlotBase> onSwapAction, Action<int, ItemConfigBase, ItemDataBase,
+    public void Init(UI_WindowBase ownerWindow, int index, ItemConfigBase itemConfig, ItemDataBase itemData,
+        Action<SlotBase, SlotBase> onDragAction, Action<int, ItemConfigBase, ItemDataBase,
             PointerEventData.InputButton> onRightButtonUseAction);
 }
 
-public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlotBase,IBeginDragHandler,
+public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlot,IBeginDragHandler,
     IDragHandler,IEndDragHandler,IPointerClickHandler
     where C:ItemConfigBase where D:ItemDataBase
 {
     public Image iconImage;
     protected C itemConfig;
     protected D itemData;
-    protected Action<SlotBase, SlotBase> onSwapAction;
+    protected Action<SlotBase, SlotBase> onDragAction;
     protected Action<int, ItemConfigBase, ItemDataBase, PointerEventData.InputButton> onUseAction;
 
-    public virtual void Init(int index,C itemConfig,D itemDate)
+    public virtual void Init(UI_WindowBase ownerWindow,int index,C itemConfig,D itemDate)
     {
         this.itemConfig = itemConfig;
         this.itemData = itemDate;
-        Init(index);
+        Init(ownerWindow,index);
         iconImage.sprite = itemConfig.icon;
     }
 
-    public void Init(int index,ItemConfigBase itemConfig, ItemDataBase itemData,
-        Action<SlotBase,SlotBase> onSwapAction, Action<int, ItemConfigBase, ItemDataBase
+    public void Init(UI_WindowBase ownerWindow, int index,ItemConfigBase itemConfig, ItemDataBase itemData,
+        Action<SlotBase,SlotBase> onDragAction, Action<int, ItemConfigBase, ItemDataBase
             , PointerEventData.InputButton> onRightButtonUseAction)
     {
         this.onUseAction = onRightButtonUseAction;
-        this.onSwapAction=onSwapAction;
-        Init(index,(C)itemConfig, (D)itemData);
+        this.onDragAction = onDragAction;
+        Init(ownerWindow,index,(C)itemConfig, (D)itemData);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -59,7 +59,7 @@ public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlotBase,IBeginDragHandl
         //当前有进入其他格子
         if (enteredSlot != null && enteredSlot != this)
         {
-            onSwapAction?.Invoke(this, enteredSlot);
+            onDragAction?.Invoke(this, enteredSlot);
 
         }
     }
