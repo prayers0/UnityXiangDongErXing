@@ -58,5 +58,19 @@ public class BagData
 
         if(aIndex==usedWeaponIndex) usedWeaponIndex = bIndex;
         else if(bIndex==usedWeaponIndex) usedWeaponIndex = aIndex;
-    } 
+    }
+
+    public bool TryGetItem(string id, out int existIndex)
+    {
+        for(int i = 0; i < items.Length; i++)
+        {
+            if (items[i] != null && items[i].id == id)
+            {
+                existIndex = i;
+                return true;
+            }
+        }
+        existIndex = -1;
+        return false;
+    }
 }

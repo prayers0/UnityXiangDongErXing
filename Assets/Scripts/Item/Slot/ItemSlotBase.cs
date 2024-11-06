@@ -5,6 +5,7 @@ using System;
 
 public interface IItemSlot
 {
+    public ItemConfigBase ItemConfig { get; }
     public void Init(UI_WindowBase ownerWindow, int index, ItemConfigBase itemConfig, ItemDataBase itemData,
         Action<SlotBase, SlotBase> onDragAction, Action<int, ItemConfigBase, ItemDataBase,
             PointerEventData.InputButton> onRightButtonUseAction);
@@ -19,6 +20,8 @@ public abstract class ItemSlotBase<C,D> : SlotBase,IItemSlot,IBeginDragHandler,
     protected D itemData;
     protected Action<SlotBase, SlotBase> onDragAction;
     protected Action<int, ItemConfigBase, ItemDataBase, PointerEventData.InputButton> onUseAction;
+
+    public ItemConfigBase ItemConfig => itemConfig;
 
     public virtual void Init(UI_WindowBase ownerWindow,int index,C itemConfig,D itemDate)
     {

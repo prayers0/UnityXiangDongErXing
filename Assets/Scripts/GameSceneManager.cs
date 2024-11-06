@@ -150,4 +150,44 @@ public class GameSceneManager : MonoBehaviour
         gameData.playerHp = hp;
         mainWindow.SetHp(gameData.playerHp/ResManager.Instance.PlayerMaxHp);
     }
+
+    public void BuyItem(ItemConfigBase itemConfig, int index)
+    {
+        //判断是否有足够的金币
+        if (gameData.coinCount > itemConfig.price)
+        {
+            //增加物品
+            //武器必须占据一个空格子
+            if(itemConfig is WeaponConfig)
+            {
+                if (gameData.bagData.items[index] != null) return;
+                //复制一份相同的数据保存到背包中国
+                gameData.bagData.items[index]=itemConfig.GetDefaultData().Copy();
+            }
+            //消耗品要优先考虑堆叠
+            else if(itemConfig is ConsunableConfig)
+            {
+                //尝试找到已经有的同名物品进行叠加
+                if (gameData.bagData.TryGetItem(itemConfig.name, out int existIndex))
+                {
+                    ConsumableData consumableData= (ConsumableData)gameData.bagData.items[existIndex];
+                    consumableData.count += ((ConsumableData)itemConfig.GetDefaultData()).count;
+                    index=existIndex;
+                }
+                //要放一个空位
+                else
+                {
+                    if (gameData.bagData.items[index] != null) return;
+                    gameData.bagData.items[index] = itemConfig.GetDefaultData().Copy();
+                }
+            }
+            //同步金币
+            SetCoin(gameData.coinCount - itemConfig.price);
+            //同步UI物品格子
+            if(UIManager.Instance.TryGetWindow(out UI_BagWindow bagWindow))
+            {
+                bagWindow.UpdateSlot(index, gameData.bagData.items[index]);
+            }
+        }
+    }
 }

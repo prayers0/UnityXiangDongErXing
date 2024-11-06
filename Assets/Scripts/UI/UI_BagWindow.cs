@@ -115,4 +115,19 @@ public class UI_BagWindow : UI_WindowBase
         }
     }
 
+    public void UpdateSlot(int index, ItemDataBase itemData)
+    {
+        //销毁旧的格子
+        GameObject.Destroy(slots[index].gameObject);
+
+        if (itemData == null)//空格子
+        {
+            CreateEmptySlot(index);
+        }
+        else//有物品的格子
+        {
+            ItemConfigBase itemConfig = ResManager.Instance.GetItemConfig(itemData.id);
+            CreateItemSlot(index, itemConfig, itemData);
+        }
+    }
 }

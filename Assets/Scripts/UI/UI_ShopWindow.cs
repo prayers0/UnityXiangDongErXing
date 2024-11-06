@@ -64,7 +64,7 @@ public class UI_ShopWindow : UI_WindowBase
         if (slotA is IItemSlot&&slotB.ownerWindow is UI_BagWindow)
         {
             IItemSlot itemSlot = (IItemSlot)slotA;
-
+            GameSceneManager.Instance.BuyItem(itemSlot.ItemConfig,slotB.index);
         }
     }
 }
