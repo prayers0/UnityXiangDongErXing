@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameSceneManager : MonoBehaviour
@@ -153,41 +152,68 @@ public class GameSceneManager : MonoBehaviour
 
     public void BuyItem(ItemConfigBase itemConfig, int index)
     {
-        //判断是否有足够的金币
-        if (gameData.coinCount > itemConfig.price)
+        //判断是否有足够的金币，不足则进行金币闪烁的提醒
+        if (gameData.coinCount<itemConfig.price)
         {
-            //增加物品
-            //武器必须占据一个空格子
-            if(itemConfig is WeaponConfig)
+            mainWindow.CoinFlash();
+            return;
+        }
+        //判断是否有足够的金币
+        //增加物品
+        //武器必须占据一个空格子
+        if (itemConfig is WeaponConfig)
+        {
+            if (gameData.bagData.items[index] != null) return;
+            //复制一份相同的数据保存到背包中国
+            gameData.bagData.items[index] = itemConfig.GetDefaultData().Copy();
+        }
+        //消耗品要优先考虑堆叠
+        else if (itemConfig is ConsunableConfig)
+        {
+            //尝试找到已经有的同名物品进行叠加
+            if (gameData.bagData.TryGetItem(itemConfig.name, out int existIndex))
+            {
+                ConsumableData consumableData = (ConsumableData)gameData.bagData.items[existIndex];
+                consumableData.count += ((ConsumableData)itemConfig.GetDefaultData()).count;
+                index = existIndex;
+            }
+            //要放一个空位
+            else
             {
                 if (gameData.bagData.items[index] != null) return;
-                //复制一份相同的数据保存到背包中国
-                gameData.bagData.items[index]=itemConfig.GetDefaultData().Copy();
+                gameData.bagData.items[index] = itemConfig.GetDefaultData().Copy();
             }
-            //消耗品要优先考虑堆叠
-            else if(itemConfig is ConsunableConfig)
-            {
-                //尝试找到已经有的同名物品进行叠加
-                if (gameData.bagData.TryGetItem(itemConfig.name, out int existIndex))
-                {
-                    ConsumableData consumableData= (ConsumableData)gameData.bagData.items[existIndex];
-                    consumableData.count += ((ConsumableData)itemConfig.GetDefaultData()).count;
-                    index=existIndex;
-                }
-                //要放一个空位
-                else
-                {
-                    if (gameData.bagData.items[index] != null) return;
-                    gameData.bagData.items[index] = itemConfig.GetDefaultData().Copy();
-                }
-            }
-            //同步金币
-            SetCoin(gameData.coinCount - itemConfig.price);
-            //同步UI物品格子
-            if(UIManager.Instance.TryGetWindow(out UI_BagWindow bagWindow))
-            {
-                bagWindow.UpdateSlot(index, gameData.bagData.items[index]);
-            }
+        }
+        //同步金币
+        SetCoin(gameData.coinCount - itemConfig.price);
+        //同步UI物品格子
+        if (UIManager.Instance.TryGetWindow(out UI_BagWindow bagWindow))
+        {
+            bagWindow.UpdateSlot(index, gameData.bagData.items[index]);
+        }
+
+    }
+
+    public void SellItem(int index)
+    {
+        ItemDataBase itemData = gameData.bagData.items[index];
+        ItemConfigBase itemConfig = ResManager.Instance.GetItemConfig(itemData.id);
+        //增加金币
+        if(itemData is WeaponData)
+        {
+            SetCoin(gameData.coinCount + itemConfig.price / 2);
+        }
+        else if(itemData is ConsumableData)
+        {
+            int count = ((ConsumableData)itemData).count;
+            SetCoin((gameData.coinCount + itemConfig.price / 2) * count);
+        }
+        //消除物品
+        gameData.bagData.items[index] = null;
+        //同步UI物品格子
+        if (UIManager.Instance.TryGetWindow(out UI_BagWindow bagWindow))
+        {
+            bagWindow.UpdateSlot(index, null);
         }
     }
 }

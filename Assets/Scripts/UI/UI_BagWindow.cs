@@ -111,7 +111,7 @@ public class UI_BagWindow : UI_WindowBase
         //TODO:出售物品
         else if(slotB.ownerWindow is UI_ShopWindow)
         {
-
+            GameSceneManager.Instance.SellItem(slotA.index);
         }
     }
 
