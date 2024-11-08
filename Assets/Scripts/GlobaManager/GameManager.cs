@@ -68,4 +68,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
+    public void LoadGameOverScene()
+    {
+        UIManager.Instance.CloseAllWindow();
+        SaveManager.DeleteGameData();
+        SceneManager.LoadScene("GameOver");
+    }
 }

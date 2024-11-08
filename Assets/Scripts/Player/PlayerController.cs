@@ -34,6 +34,7 @@ public class PlayerController : CharacterControllerBase<PlayerView>
 
     private void Update()
     {
+        if (currentHP <= 0) return;
         if (CanJump()&&Input.GetKey(KeyCode.Space))
         {
             Jump();
@@ -73,7 +74,14 @@ public class PlayerController : CharacterControllerBase<PlayerView>
 
     protected override void Die()
     {
-        
+        Move(0, false, false);
+        view.PlayerAnimation("Die");
+        Invoke(nameof(LoadGameOverScene), 3);
+    }
+
+    private void LoadGameOverScene()
+    {
+        GameManager.Instance.LoadGameOverScene();
     }
 
     protected void UpdatePlayerPositionData()
