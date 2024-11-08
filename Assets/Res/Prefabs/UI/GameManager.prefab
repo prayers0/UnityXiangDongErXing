@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 4974607097098369785}
+  coinAudio: {fileID: 8300000, guid: 69697f0450350420ba7e429fa140ba7d, type: 3}
 --- !u!1 &9086983351489489410
 GameObject:
   m_ObjectHideFlags: 0

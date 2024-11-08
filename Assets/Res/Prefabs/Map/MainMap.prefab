@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 304773534}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DecorationRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 9041732104480340018}
   - component: {fileID: 9041732104480340017}
   - component: {fileID: 9041732104480339980}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 9041732104626851107}
   - component: {fileID: 9041732104626851132}
   - component: {fileID: 9041732104626851133}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 9041732104876679126}
   - component: {fileID: 9041732104876679127}
   - component: {fileID: 9041732104876679120}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 9041732104928461528}
   - component: {fileID: 9041732104928461529}
   - component: {fileID: 9041732104928461530}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9041732105125949414}
   - component: {fileID: 9041732105125949413}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TileMaps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 9041732105222879301}
   - component: {fileID: 9041732105222879302}
   - component: {fileID: 9041732105222879303}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 9041732105465883191}
   - component: {fileID: 9041732105465883190}
   - component: {fileID: 9041732105465883184}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9041732105485597085}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -791,7 +791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9041732105650793983}
   - component: {fileID: 9041732105650793976}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 9041732105736161140}
   - component: {fileID: 9041732105736161141}
   - component: {fileID: 9041732105736161142}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -950,7 +950,7 @@ GameObject:
   - component: {fileID: 9041732105807904180}
   - component: {fileID: 9041732105807904187}
   - component: {fileID: 9041732105807904181}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MainMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -994,6 +994,7 @@ MonoBehaviour:
   decorationRoot: {fileID: 304773534}
   mapConfig: {fileID: 11400000, guid: 2a88a6a74c27a3745b847ba4fa03cba7, type: 2}
   groundTileMap: {fileID: 9041732105465883191}
+  rightWall: {fileID: 0}
   mapSeed: 0
   playerController: {fileID: 0}
 --- !u!114 &9041732105807904187

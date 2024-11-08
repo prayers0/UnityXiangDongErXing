@@ -155,7 +155,7 @@ public class GameSceneManager : MonoBehaviour
         //判断是否有足够的金币，不足则进行金币闪烁的提醒
         if (gameData.coinCount<itemConfig.price)
         {
-            mainWindow.CoinFlash();
+            mainWindow.CoinFlash(false);
             return;
         }
         //判断是否有足够的金币
@@ -208,6 +208,7 @@ public class GameSceneManager : MonoBehaviour
             int count = ((ConsumableData)itemData).count;
             SetCoin((gameData.coinCount + itemConfig.price / 2) * count);
         }
+        mainWindow.CoinFlash(true);
         //消除物品
         gameData.bagData.items[index] = null;
         //同步UI物品格子
@@ -215,5 +216,11 @@ public class GameSceneManager : MonoBehaviour
         {
             bagWindow.UpdateSlot(index, null);
         }
+    }
+
+    public void AddCoin(int coinCount)
+    {
+        mainWindow.CoinFlash(true);
+        SetCoin(gameData.coinCount + coinCount);
     }
 }

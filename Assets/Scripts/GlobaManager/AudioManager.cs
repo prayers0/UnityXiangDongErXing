@@ -1,12 +1,17 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioManager : GlobaManagerBase<AudioManager>
 {
-    [SerializeField] private AudioSource audioSource;
+    public AudioSource audioSource;
+    public AudioClip coinAudio;
 
     public void PlayerAudio(AudioClip audioClip,float volum = 1)
     {
         audioSource.PlayOneShot(audioClip, volum);
+    }
+
+    public void PlayerAudio()
+    {
+        PlayerAudio(coinAudio, 0.5f);
     }
 }

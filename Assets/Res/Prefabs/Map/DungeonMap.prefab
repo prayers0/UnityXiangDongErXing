@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 775367165}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DecorationRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4043366147203690205}
   - component: {fileID: 6795902885962924723}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 3105014517491537762}
   - component: {fileID: 3105014517491537763}
   - component: {fileID: 3105014517491537760}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 3105014517540145772}
   - component: {fileID: 3105014517540145773}
   - component: {fileID: 3105014517540145770}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 3105014517680680328}
   - component: {fileID: 3105014517680680331}
   - component: {fileID: 3105014517680680374}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 3105014517860751513}
   - component: {fileID: 3105014517860751494}
   - component: {fileID: 3105014517860751495}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,7 +494,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3105014518014848039}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 3105014518028959629}
   - component: {fileID: 3105014518028959628}
   - component: {fileID: 3105014518028959626}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -817,7 +817,7 @@ GameObject:
   - component: {fileID: 3105014518322818559}
   - component: {fileID: 3105014518322818556}
   - component: {fileID: 3105014518322818557}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -915,7 +915,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3105014518359849564}
   - component: {fileID: 3105014518359849567}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TileMaps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -962,7 +962,7 @@ GameObject:
   - component: {fileID: 3105014518505187342}
   - component: {fileID: 3105014518505187329}
   - component: {fileID: 3105014518505187343}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DungeonMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1049,7 +1049,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3105014518716921925}
   - component: {fileID: 3105014518716921922}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1108,7 +1108,7 @@ GameObject:
   - component: {fileID: 3105014518835843790}
   - component: {fileID: 3105014518835843791}
   - component: {fileID: 3105014518835843788}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

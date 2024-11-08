@@ -17,8 +17,8 @@ public class UI_GameMainWindow : UI_WindowBase
         hpFillImage.fillAmount = fillAmount;
     }
 
-    public void CoinFlash()
+    public void CoinFlash(bool isRed)
     {
-        coinAnimation.CrossFade("CoinFlash", 0);
+        coinAnimation.CrossFade(isRed?"CoinFlashRed":"CoinFlashGreen", 0);
     }
 }
