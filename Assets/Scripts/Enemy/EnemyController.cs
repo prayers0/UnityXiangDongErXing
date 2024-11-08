@@ -7,13 +7,21 @@ using UnityEngine;
 //追击过程中，如果玩家足够近则攻击玩家
 public class EnemyController : CharacterControllerBase<EnemyView>
 {
+    [Header("主要配置")]
     [SerializeField] protected float maxHp;
-
     [SerializeField] private float knockbackRation;
     [SerializeField] private float attackRangle;
     [SerializeField] private float pursueRange;
     [SerializeField] private float pursueAbandonRange;
     [SerializeField] private float destroyDelay;//延迟销毁时间，用来表现死亡动画
+
+    [Header("掉落配置")]
+    [Range(0, 1f)] public float dropProbaility;
+    public Vector2Int dropCountRange;
+    public GameObject[] dropObjectPrefab;
+    public float dropHeightOffset;
+
+
     private Coroutine doKnockbackCoroutine;
     private bool pursueState;
     private bool patrolDirIsRight;
@@ -159,7 +167,22 @@ public class EnemyController : CharacterControllerBase<EnemyView>
 
     protected override void Die()
     {
+        //关闭所有携程
         StopAllCoroutines();
+        //掉落物品
+        if (UnityEngine.Random.Range(0, 1f) < dropProbaility)
+        {
+            int count = UnityEngine.Random.Range(dropCountRange.x, dropCountRange.y);
+            for(int i = 0; i < count; i++)
+            {
+                Vector2 pos = UnityEngine.Random.insideUnitCircle + new Vector2(transform.position.x, 
+                    transform.position.y + dropHeightOffset);
+                GameObject prefab = dropObjectPrefab[UnityEngine.Random.Range(0, dropObjectPrefab.Length)];
+                GameObject obj = GameObject.Instantiate(prefab, pos, Quaternion.identity, null);
+                obj.GetComponent<IDropObject>().Init(currentMapChunkCoord);
+                MapController.current.AddDropObject(obj, currentMapChunkCoord);
+            }
+        }
         Invoke(nameof(DoDie), destroyDelay);
         view.PlayerAnimation("Die");
         //关闭碰撞体，刚体

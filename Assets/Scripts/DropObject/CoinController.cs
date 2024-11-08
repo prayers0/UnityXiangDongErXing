@@ -16,6 +16,7 @@ public class CoinController : MonoBehaviour, IDropObject
         {
             GameSceneManager.Instance.AddCoin(10);
             AudioManager.Instance.PlayerAudio();
+            MapController.current.RemoveDropObject(gameObject, mapChunkCoord);
             Destroy(gameObject);
         }
     }

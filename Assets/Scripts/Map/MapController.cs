@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -183,6 +184,22 @@ public class MapController : MonoBehaviour
     {
         GameObject.Destroy(gameObject);
         current = null;
+    }
+
+    public void AddDropObject(GameObject obj, int mapChunkCoord)
+    {
+        if(mapChunkDic.TryGetValue(mapChunkCoord,out MapChunk mapChunk))
+        {
+            mapChunk.AddDropObject(obj);
+        }
+    }
+
+    public void RemoveDropObject(GameObject obj, int mapChunkCoord)
+    {
+        if(mapChunkDic.TryGetValue(mapChunkCoord,out MapChunk mapChunk))
+        {
+            mapChunk.RemoveDropObject(obj);
+        }
     }
 }
 

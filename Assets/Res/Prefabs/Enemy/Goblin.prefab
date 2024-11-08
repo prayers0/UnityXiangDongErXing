@@ -88,7 +88,6 @@ MonoBehaviour:
   rigidbody: {fileID: 814689394543574219}
   moveSpeed: 3
   jumpPower: 12
-  maxHp: 100
   weapon: {fileID: 814689396203336768}
   skillDatas:
   - animationName: Attack1
@@ -115,11 +114,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 88838998441d6d040a20b1f3d17cc253, type: 3}
   - {fileID: 8300000, guid: a7aa3554928a270478f7e93eef9c45a7, type: 3}
   - {fileID: 8300000, guid: ba42854e77ac9bb4e8b730aa84cce8a9, type: 3}
+  maxHp: 100
   knockbackRation: 1
   attackRangle: 1
   pursueRange: 3
   pursueAbandonRange: 6
   destroyDelay: 2
+  dropProbaility: 0.5
+  dropCountRange: {x: 1, y: 3}
+  dropObjectPrefab:
+  - {fileID: 8945878420409556317, guid: b1763174b325e754dbb9eed0fa8aee6a, type: 3}
+  dropHeightOffset: 1.2
 --- !u!1 &814689394855061769
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +199,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 305628559
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d1fa079cd3fef2d4b8769f2d23234552, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

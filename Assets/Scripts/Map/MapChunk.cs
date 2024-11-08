@@ -8,6 +8,7 @@ using Random=System.Random;
 public class MapChunk
 {
     private List<GameObject> decorationList;//所有装饰物
+    private HashSet<GameObject> dropObjects;
     private Random chunkRandom;
     private MapConfig mapConfig;
     private Tilemap groundTileMap;
@@ -35,6 +36,7 @@ public class MapChunk
         int chunkSeed = mapSeed + chunkCoord;
         Random chunkRandom = new Random(chunkSeed);
         decorationList = new List<GameObject>();
+        dropObjects=new HashSet<GameObject>();
         //是否包含门
         MapDungeonDoorConfig doorConfig = mapConfig.mapDoorConfig;
         haveDoor = doorConfig.prefab.Count > 0 
@@ -63,6 +65,9 @@ public class MapChunk
         //销毁敌人
         DestroyEnemys();
         DestroyDoor();
+
+        //销毁掉落物
+        DestroyDropObjects();
     }
 
     //生成地图块中的段
@@ -301,5 +306,23 @@ public class MapChunk
             }
         }
         return false;
+    }
+
+    public  void AddDropObject(GameObject obj)
+    {
+        dropObjects.Add(obj);
+    }
+
+    public void RemoveDropObject(GameObject obj)
+    {
+        dropObjects.Remove(obj);
+    }
+
+    private void DestroyDropObjects()
+    {
+        foreach(var item in dropObjects)
+        {
+            GameObject.Destroy(item);
+        }
     }
 }
