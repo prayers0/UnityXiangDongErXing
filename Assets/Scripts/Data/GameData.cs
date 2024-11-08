@@ -50,6 +50,8 @@ public class BagData
     //已经使用的武器索引
     public int usedWeaponIndex;
 
+    public WeaponData useWeaponData =>(WeaponData) items[usedWeaponIndex];
+
     public void Swap(int aIndex, int bIndex)
     {
         ItemDataBase temp = items[aIndex];

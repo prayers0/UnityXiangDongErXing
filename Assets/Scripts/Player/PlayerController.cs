@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,16 +5,22 @@ using UnityEngine.EventSystems;
 public class PlayerController : CharacterControllerBase<PlayerView>
 {
     public static PlayerController Instance { get; private set; }
-    private int currentSkillIndex=0;
 
-    private void Awake()
+    public override float MaxHp => ResManager.Instance.PlayerMaxHp;
+
+    private int currentSkillIndex=0;
+    private WeaponConfig weaponConfig;
+
+    private void Awake() 
     {
         Instance = this;
     }
 
-    public void InitHP(float hp)
+    public void Init(float hp,WeaponConfig weaponConifg)
     {
+        base.Init();
         this.currentHP = hp;
+        weaponConfig= weaponConifg;
     }
 
     protected override void OnHPChanged(float newHp)
@@ -91,8 +96,22 @@ public class PlayerController : CharacterControllerBase<PlayerView>
         }
     }
 
+    protected override float GetAttackValue(float skillAttackValueMultiply)
+    {
+        return (baseAttackValue + weaponConfig.attackValue) * skillAttackValueMultiply;
+    }
+
     public void OnUssItem(ItemConfigBase itemConfig, ItemDataBase itemData)
     {
+        if(itemConfig is WeaponConfig)
+        {
+            weaponConfig = (WeaponConfig)itemConfig;
+        }
+        else if(itemConfig is ConsunableConfig)
+        {
+            float addHp = ((ConsunableConfig)itemConfig).hpRegeneration;
+            CurrentHP += addHp;
+        }
     }
 
     public void OnMerchantStay(List<ItemConfigBase> items)

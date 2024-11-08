@@ -207,12 +207,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 5206815469088072266}
   rigidbody: {fileID: 5206815469869332356}
+  baseAttackValue: 40
   moveSpeed: 3
   jumpPower: 12
   weapon: {fileID: 5206815470437007119}
   skillDatas:
   - animationName: Attack1
-    attackValue: 20
+    attackValueMultiply: 1
     canMove: 0
     moveSpeedMultiply: 0
     releaseAudio: {fileID: 8300000, guid: 73552316b142dd147bcd1884fa6cd2f2, type: 3}
@@ -225,7 +226,7 @@ MonoBehaviour:
       knockbackTime: 0
     attackRange: {x: 0, y: 1}
   - animationName: Attack2
-    attackValue: 20
+    attackValueMultiply: 1.2
     canMove: 1
     moveSpeedMultiply: 0.2
     releaseAudio: {fileID: 8300000, guid: 61c3d9a58dbe4ef44a609e1665ecacff, type: 3}
@@ -238,7 +239,7 @@ MonoBehaviour:
       knockbackTime: 0
     attackRange: {x: 1, y: 2}
   - animationName: Attack3Start
-    attackValue: 20
+    attackValueMultiply: 0
     canMove: 1
     moveSpeedMultiply: 0.8
     releaseAudio: {fileID: 8300000, guid: 6821383a375d63a42b2243b9e5f8a1f0, type: 3}

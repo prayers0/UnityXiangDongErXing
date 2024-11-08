@@ -17,8 +17,9 @@ public class GameSceneManager : MonoBehaviour
         mainWindow=UIManager.Instance.ShowWindow<UI_GameMainWindow>();
         mainWindow.SetCoin(gameData.coinCount);
         mainWindow.SetHp(gameData.playerHp / ResManager.Instance.PlayerMaxHp);
-        PlayerController.Instance.Init();
-        PlayerController.Instance.InitHP(gameData.playerHp);
+        WeaponConfig weaponConfig = (WeaponConfig)ResManager.Instance.
+            GetItemConfig(gameData.bagData.useWeaponData.id);
+        PlayerController.Instance.Init(gameData.playerHp,weaponConfig);
         if (gameData.onMainMap) LoadMainMap();
         else LoadDungeonMap();
         //ºÚÄ»ÕÚµ²

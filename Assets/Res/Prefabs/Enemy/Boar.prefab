@@ -278,12 +278,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 9181577118859869562}
   rigidbody: {fileID: 9181577119102019764}
+  baseAttackValue: 10
   moveSpeed: 3
   jumpPower: 12
   weapon: {fileID: 9181577117510934591}
   skillDatas:
   - animationName: Attack1
-    attackValue: 10
+    attackValueMultiply: 1
     canMove: 1
     moveSpeedMultiply: 0.2
     releaseAudio: {fileID: 8300000, guid: 73552316b142dd147bcd1884fa6cd2f2, type: 3}

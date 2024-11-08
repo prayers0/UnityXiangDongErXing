@@ -26,6 +26,8 @@ public class EnemyController : CharacterControllerBase<EnemyView>
     private bool pursueState;
     private bool patrolDirIsRight;
     private int currentMapChunkCoord;
+
+    public override float MaxHp => maxHp;
     //private void Start()
     //{
     //    Init();

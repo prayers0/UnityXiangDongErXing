@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public interface ICharacterController 
@@ -10,6 +8,7 @@ public abstract class CharacterControllerBase<V> : MonoBehaviour,ICharacterContr
 {
     [SerializeField] protected V view;
     [SerializeField] protected new Rigidbody2D rigidbody;
+    [SerializeField] public float baseAttackValue;
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected float jumpPower;
     [SerializeField] protected Weapon weapon;
@@ -26,16 +25,23 @@ public abstract class CharacterControllerBase<V> : MonoBehaviour,ICharacterContr
         get => currentHP;
         set
         {
+            value = Mathf.Clamp(value, 0, MaxHp);
+
             if (currentHP == value) return;
-            currentHP = value;
+            currentHP=value;
             OnHPChanged(currentHP);
+            if (currentHP > MaxHp)
+            {
+                currentHP=MaxHp;
+            }
             if (currentHP <= 0)
             {
-                currentHP = 0;
                 Die();
             }
         } 
     }
+
+    public abstract float MaxHp { get; }
 
     protected virtual void OnHPChanged(float newHp)
     {
@@ -142,8 +148,13 @@ public abstract class CharacterControllerBase<V> : MonoBehaviour,ICharacterContr
     private void OnHit(IDamageable damageable, int skillIndex)
     {
         SkillData skillData = skillDatas[skillIndex];
-        damageable.Hurt(skillData.attackValue,this,skillData.hitData);
+        damageable.Hurt(GetAttackValue(skillData.attackValueMultiply),this,skillData.hitData);
         if (skillData.hitData != null) AudioManager.Instance.PlayerAudio(skillData.hitClip);
+    }
+
+    protected virtual float GetAttackValue(float skillAttackValueMultiply)
+    {
+        return baseAttackValue * skillAttackValueMultiply;
     }
 
     private void OnSkillStop()

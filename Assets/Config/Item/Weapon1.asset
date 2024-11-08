@@ -17,4 +17,4 @@ MonoBehaviour:
   price: 50
   description: "\u5F88\u5389\u5BB3\u7684\u4E00\u628A\u5200"
   slotPrefab: {fileID: 6060876645306740905, guid: 26537cfca7d6a9742b25efd4d938cf13, type: 3}
-  attackValue: 0
+  attackValue: 10

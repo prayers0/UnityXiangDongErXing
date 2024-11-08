@@ -7,7 +7,7 @@ public class SkillData
 {
     [Header("¹²Ïí")]
     public string animationName;
-    public float attackValue;
+    public float attackValueMultiply;
     public bool canMove;
     public float moveSpeedMultiply;
     public AudioClip releaseAudio;
