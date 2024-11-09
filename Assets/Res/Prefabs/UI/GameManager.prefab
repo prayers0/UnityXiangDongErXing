@@ -209,7 +209,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b00490add25197843ab3b8160f7114bd, type: 2}
   - {fileID: 11400000, guid: 0d7022a90c80d7347a0937b9efa19250, type: 2}
   PlayerDefaultCoinCount: 100
-  PlayerMaxHp: 100
+  PlayerMaxHp: 500
 --- !u!1 &9086983351985435041
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,6 +337,7 @@ MonoBehaviour:
   - {fileID: 3495787542609761511, guid: 8687dce03cbeaed499fb507242367c6c, type: 3}
   - {fileID: 2255260250688329154, guid: 01bda0dc5f06d2c408793954ec8a0c1e, type: 3}
   - {fileID: 7770364668317652432, guid: 6ed1f59746107dc449a216157d3c09b2, type: 3}
+  - {fileID: 1174334118292906140, guid: db93ae8e6437d2f4991e2515a9319758, type: 3}
 --- !u!1 &9086983352668377125
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class UI_MenuSceneMainWindow : UI_WindowBase
 
     private void SettingButtonClick()
     {
-        
+        UIManager.Instance.ShowWindow<UI_SettingsWindow>();
     }
 
     private void quitButtonClick()

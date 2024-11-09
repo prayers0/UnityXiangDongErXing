@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get;private set; }
     public GameData gameData { get; private set; }
+    public GameSettings gameSettings { get; private set; }
    
     private void Awake()
     {
@@ -21,11 +22,42 @@ public class GameManager : MonoBehaviour
         {
             manager.Init();
         }
+        OnGameStart();
+    }
+
+    private void OnGameStart()
+    {
+        if (!SaveManager.ExistGameSettings())
+        {
+            gameSettings = new GameSettings
+            {
+                volume = 1,
+                resolutionType = ResolutionType.R1920X1080,
+                fullScreen = true,
+            };
+            SaveGameSettings();
+        }
+        else
+        {
+            gameSettings=SaveManager.GetGameSettings();
+        }
+        ApplyGameSettings();
+    }
+
+    public void ApplyGameSettings()
+    {
+        AudioManager.Instance.SetVolume(gameSettings.volume);
+        Vector2Int screenSize = gameSettings.GetScreenResolution();
+        Screen.SetResolution(screenSize.x, screenSize.y, gameSettings.fullScreen);
+    }
+
+    public void SaveGameSettings()
+    {
+        SaveManager.SaveGmaeSetting(gameSettings);
     }
 
     public void NewGame()
     {
-        
         UIManager.Instance.CloseAllWindow();
         //¹¹½¨Ä¬ÈÏ´æµµ
         BagData bagData=new BagData();
